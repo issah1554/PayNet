@@ -1,0 +1,327 @@
+/* Base Button Styles */
+.button {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  line-height: 1;
+  position: relative;
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Button Sizes */
+.button.xs {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+}
+
+.button.sm {
+  padding: 0.375rem 0.75rem;
+  font-size: 0.8125rem;
+}
+
+.button.md {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+}
+
+.button.lg {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+}
+
+.button.xl {
+  padding: 1rem 2rem;
+  font-size: 1.125rem;
+}
+
+.button.full-width {
+  width: 100%;
+}
+
+/* Button Variants - Solid (default) */
+.button.solid {
+  border: 1px solid transparent;
+}
+
+/* Outline Variant */
+.button.outline {
+  background-color: transparent;
+  border: 1px solid currentColor;
+}
+
+/* Text Variant - Improved hover states */
+.button.text {
+  background-color: transparent;
+  border: 1px solid transparent;
+  padding: 0.25rem 0.5rem;
+  color: inherit;
+  /* Inherit text color */
+}
+
+.button.text:hover:not(:disabled) {
+  background-color: rgba(0, 0, 0, 0.05);
+  /* Light gray hover for all text buttons */
+}
+
+/* Color Variants - Primary (using --db colors) */
+.button.primary {
+  background-color: var(--db-primary-light);
+  color: white;
+}
+
+.button.primary:hover:not(:disabled) {
+  background-color: rgb(var(--db-primary-light-rgb), 0.8);
+}
+
+.button.outline.primary {
+  color: var(--db-primary-light);
+  background-color: transparent;
+  border-color: var(--db-primary-light);
+}
+
+.button.outline.primary:hover:not(:disabled) {
+  background-color: rgba(var(--db-primary-light-rgb), 0.1);
+}
+
+.button.text.primary {
+  color: var(--db-primary-light);
+  background-color: transparent;
+}
+
+.button.text.primary:hover:not(:disabled) {
+  background-color: rgba(var(--db-primary-light-rgb), 0.1);
+  border: 1px solid rgba(var(--db-primary-light-rgb), 0.2);
+}
+
+/* Light (using --db colors) */
+.button.light {
+  background-color: var(--db-light);
+  color: var(--db-primary-light);
+}
+
+.button.light:hover:not(:disabled) {
+  background-color: rgb(var(--db-light-rgb), 0.8);
+}
+
+.button.outline.light {
+  color: var(--db-light);
+  background-color: transparent;
+  border-color: var(--db-light);
+}
+
+.button.outline.light:hover:not(:disabled) {
+  background-color: rgba(var(--db-light-rgb), 0.1);
+}
+
+.button.text.light {
+  color: var(--db-light);
+  background-color: transparent;
+}
+
+.button.text.light:hover:not(:disabled) {
+  background-color: rgba(var(--db-light-rgb), 0.1);
+    border: 1px solid rgba(var(--db-light-rgb), 0.4);
+}
+
+/* Secondary (using Bootstrap variables) */
+.button.secondary {
+  background-color: var(--db-secondary);
+  color: white;
+}
+
+.button.secondary:hover:not(:disabled) {
+  background-color: rgb(var(--db-secondary-rgb),0.8);
+}
+
+.button.outline.secondary {
+  color: var(--db-secondary);
+  background-color: transparent;
+  border-color: var(--db-secondary);
+}
+
+.button.outline.secondary:hover:not(:disabled) {
+  background-color: rgba(var(--db-secondary-rgb), 0.1);
+}
+
+.button.text.secondary {
+  color: var(--db-secondary);
+  background-color: transparent;
+}
+
+.button.text.secondary:hover:not(:disabled) {
+  background-color: rgba(var(--db-secondary-rgb), 0.1);
+    border: 1px solid rgba(var(--db-secondary-rgb), 0.2);
+}
+
+/* Danger (using Bootstrap variables) */
+.button.danger {
+  background-color: var(--bs-danger);
+  color: white;
+}
+
+.button.danger:hover:not(:disabled) {
+  background-color: rgb(var(--bs-danger-rgb), 0.8);
+}
+
+.button.outline.danger {
+  color: var(--bs-danger);
+  background-color: transparent;
+  border-color: var(--bs-danger);
+}
+
+.button.outline.danger:hover:not(:disabled) {
+  background-color: rgba(var(--bs-danger-rgb), 0.1);
+}
+
+.button.text.danger {
+  color: var(--bs-danger);
+  background-color: transparent;
+}
+
+.button.text.danger:hover:not(:disabled) {
+  background-color: rgba(var(--bs-danger-rgb), 0.1);
+      border: 1px solid rgba(var(--bs-danger-rgb), 0.2);
+}
+
+/* Success (using Bootstrap variables) */
+.button.success {
+  background-color: var(--bs-success);
+  color: white;
+}
+
+.button.success:hover:not(:disabled) {
+  background-color: rgb(var(--bs-success-rgb), 0.8);
+}
+
+.button.outline.success {
+  color: var(--bs-success);
+  background-color: transparent;
+  border-color: var(--bs-success);
+}
+
+.button.outline.success:hover:not(:disabled) {
+  background-color: rgba(var(--bs-success-rgb), 0.1);
+}
+
+.button.text.success {
+  color: var(--bs-success);
+  background-color: transparent;
+}
+
+.button.text.success:hover:not(:disabled) {
+  background-color: rgba(var(--bs-success-rgb), 0.1);
+      border: 1px solid rgba(var(--bs-success-rgb), 0.2);
+}
+
+/* Warning (using Bootstrap variables) */
+.button.warning {
+  background-color: var(--bs-warning);
+  color: black;
+}
+
+.button.warning:hover:not(:disabled) {
+  background-color: rgb(var(--bs-warning-rgb), 0.8);
+}
+
+.button.outline.warning {
+  color: var(--bs-warning);
+  background-color: transparent;
+  border-color: var(--bs-warning);
+}
+
+.button.outline.warning:hover:not(:disabled) {
+  background-color: rgba(var(--bs-warning-rgb), 0.1);
+}
+
+.button.text.warning {
+  color: var(--bs-warning);
+  background-color: transparent;
+}
+
+.button.text.warning:hover:not(:disabled) {
+  background-color: rgba(var(--bs-warning-rgb), 0.1);
+      border: 1px solid rgba(var(--bs-warning-rgb), 0.3);
+}
+
+/* Info (using Bootstrap variables) */
+.button.info {
+  background-color: var(--bs-info);
+  color: white;
+}
+
+.button.info:hover:not(:disabled) {
+  background-color: rgb(var(--bs-info-rgb), 0.8);
+}
+
+.button.outline.info {
+  color: var(--bs-info);
+  background-color: transparent;
+  border-color: var(--bs-info);
+}
+
+.button.outline.info:hover:not(:disabled) {
+  background-color: rgba(var(--bs-info-rgb), 0.1);
+}
+
+.button.text.info {
+  color: var(--bs-info);
+  background-color: transparent;
+}
+
+.button.text.info:hover:not(:disabled) {
+  background-color: rgba(var(--bs-info-rgb), 0.1);
+      border: 1px solid rgba(var(--bs-info-rgb), 0.2);
+}
+
+/* Rounded Button */
+.button.rounded {
+  border-radius: 9999px;
+}
+
+/* Icon Button Styles */
+.button.has-icon {
+  gap: 0.5rem;
+}
+
+.button.icon-only {
+  padding: 0.5rem;
+  aspect-ratio: 1/1;
+}
+
+/* Loading State */
+.button.loading {
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.spinner {
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: currentColor;
+  animation: spin 1s ease-in-out infinite;
+}
+
+.button.text .spinner,
+.button.outline .spinner {
+  border-top-color: currentColor;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

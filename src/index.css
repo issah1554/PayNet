@@ -1,0 +1,92 @@
+:root {
+  /* === Primary (Modern Brown) === */
+  --color-brown-lightest: #faf4ef;
+  --color-brown-lighter: #f3e3d2;
+  --color-brown-light: #d6bfa8;
+  --color-brown: #996633;
+  --color-brown-dark: #704a23;
+  --color-brown-darker: #4c3119;
+  --color-brown-darkest: #2b1b0f;
+
+  /* === Secondary (Muted Teal) === */
+  --color-secondary-light: #a4c7c7;
+  --color-secondary: #3b7d7d;
+  --color-secondary-dark: #275353;
+
+  /* === Accent (Soft Gold) === */
+  --color-accent-light: #f5dca3;
+  --color-accent: #d4a017;
+  --color-accent-dark: #8c6b10;
+
+  /* === Status Colors === */
+  --color-success: #22c55e;
+  --color-warning: #eab308;
+  --color-error: #ef4444;
+  --color-info: #3b82f6;
+
+  /* === Neutral Base === */
+  --neutral-white: #ffffff;
+  /* pure white for highest contrast backgrounds */
+  --neutral-50: #fafafa;
+  /* page background */
+  --neutral-100: #f5f5f5;
+  /* card background, light surfaces */
+  --neutral-200: #e5e5e5;
+  /* borders, dividers */
+  --neutral-300: #d4d4d4;
+  /* inputs, secondary borders */
+  --neutral-400: #a3a3a3;
+  /* placeholder text, disabled icons */
+  --neutral-500: #737373;
+  /* secondary text */
+  --neutral-600: #525252;
+  /* body text */
+  --neutral-700: #404040;
+  /* headings, strong text */
+  --neutral-800: #262626;
+  /* dark surface */
+  --neutral-900: #171717;
+  /* background in dark mode */
+  --neutral-black: #000000;
+  /* pure black for overlays or typography */
+
+  /* === Neutral Roles === */
+  --color-bg-page: var(--neutral-50);
+  --color-bg-surface: var(--neutral-100);
+  --color-bg-elevated: var(--neutral-200);
+  --color-border: var(--neutral-200);
+  --color-divider: var(--neutral-300);
+  --color-text-primary: var(--neutral-700);
+  --color-text-secondary: var(--neutral-500);
+  --color-text-muted: var(--neutral-400);
+  --color-disabled-bg: var(--neutral-100);
+  --color-disabled-text: var(--neutral-400);
+  --color-shadow: rgba(0, 0, 0, 0.1);
+  --color-overlay: rgba(0, 0, 0, 0.4);
+}
+
+body {
+  font-family: sans-serif;
+  background-color: var(--neutral-100);
+  margin: 2rem;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.color-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.color-row>div {
+  flex: 1;
+  padding: 1rem;
+  color: white;
+  text-align: center;
+  border-radius: 4px;
+  font-weight: bold;
+}
