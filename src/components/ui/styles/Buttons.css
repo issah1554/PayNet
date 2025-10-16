@@ -77,12 +77,12 @@
 
 /* Color Variants - Primary (using --db colors) */
 .button.primary {
-  background-color: var(--db-primary-light);
+  background-color: var(--color-primary);
   color: white;
 }
 
 .button.primary:hover:not(:disabled) {
-  background-color: rgb(var(--db-primary-light-rgb), 0.8);
+  background-color: var(--color-primary-dark);
 }
 
 .button.outline.primary {

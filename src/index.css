@@ -1,12 +1,12 @@
 :root {
   /* === Primary (Modern Brown) === */
-  --color-brown-lightest: #faf4ef;
-  --color-brown-lighter: #f3e3d2;
-  --color-brown-light: #d6bfa8;
-  --color-brown: #996633;
-  --color-brown-dark: #704a23;
-  --color-brown-darker: #4c3119;
-  --color-brown-darkest: #2b1b0f;
+  --color-primary-lightest: #faf4ef;
+  --color-primary-lighter: #f3e3d2;
+  --color-primary-light: #d6bfa8;
+  --color-primary: #996633;
+  --color-primary-dark: #704a23;
+  --color-primary-darker: #4c3119;
+  --color-primary-darkest: #2b1b0f;
 
   /* === Secondary (Muted Teal) === */
   --color-secondary-light: #a4c7c7;
