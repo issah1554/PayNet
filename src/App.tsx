@@ -1,10 +1,14 @@
 // App.jsx
-import TestPage from "./features/Test";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import LoginPage from "./features/auth/LoginPage";
+
 function App() {
   return (
-    <>
-      <TestPage/>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LoginPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
