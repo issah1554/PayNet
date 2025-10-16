@@ -26,43 +26,198 @@
 
   /* === Neutral Base === */
   --neutral-white: #ffffff;
-  /* pure white for highest contrast backgrounds */
   --neutral-50: #fafafa;
-  /* page background */
   --neutral-100: #f5f5f5;
-  /* card background, light surfaces */
   --neutral-200: #e5e5e5;
-  /* borders, dividers */
   --neutral-300: #d4d4d4;
-  /* inputs, secondary borders */
   --neutral-400: #a3a3a3;
-  /* placeholder text, disabled icons */
   --neutral-500: #737373;
-  /* secondary text */
   --neutral-600: #525252;
-  /* body text */
   --neutral-700: #404040;
-  /* headings, strong text */
   --neutral-800: #262626;
-  /* dark surface */
   --neutral-900: #171717;
-  /* background in dark mode */
   --neutral-black: #000000;
-  /* pure black for overlays or typography */
 
   /* === Neutral Roles === */
   --color-bg-page: var(--neutral-50);
   --color-bg-surface: var(--neutral-100);
   --color-bg-elevated: var(--neutral-200);
+  --color-disabled-bg: var(--neutral-100);
+
   --color-border: var(--neutral-200);
   --color-divider: var(--neutral-300);
-  --color-text-primary: var(--neutral-700);
-  --color-text-secondary: var(--neutral-500);
+
+  --color-text-primary: var(--color-primary);
+  --color-text-secondary: var(--color-secondary);
+  --color-text-accent: var(--color-accent);
+  --color-text-neutral: var(--neutral-700);
+  --color-text-body: var(--neutral-600);
   --color-text-muted: var(--neutral-400);
-  --color-disabled-bg: var(--neutral-100);
-  --color-disabled-text: var(--neutral-400);
+  --color-text-disabled: var(--neutral-400);
+
+  --color-text-inverse: var(--neutral-white);
+  --color-bg-inverse: var(--neutral-900);
+
+  /* === Interaction States === */
+  --color-primary-hover: var(--color-primary-dark);
+  --color-primary-active: var(--color-primary-darker);
+
+  --color-secondary-hover: var(--color-secondary-dark);
+  --color-secondary-active: var(--color-secondary-dark);
+
+  --color-accent-hover: var(--color-accent-dark);
+  --color-accent-active: var(--color-accent-dark);
+
+  --color-focus: var(--color-accent);
   --color-shadow: rgba(0, 0, 0, 0.1);
   --color-overlay: rgba(0, 0, 0, 0.4);
+
+  /* === Elevation === */
+  --shadow-sm: 0 1px 2px var(--color-shadow);
+  --shadow-md: 0 2px 4px var(--color-shadow);
+  --shadow-lg: 0 4px 8px var(--color-shadow);
+
+  /* === Transparency Utilities === */
+  --opacity-disabled: 0.6;
+  --opacity-overlay: 0.4;
+}
+
+
+/* === COLOR UTILITY CLASSES === */
+
+/* --- Text Colors --- */
+.text-primary {
+  color: var(--color-text-primary);
+}
+
+.text-secondary {
+  color: var(--color-text-secondary);
+}
+
+.text-accent {
+  color: var(--color-text-accent);
+}
+
+.text-neutral {
+  color: var(--color-text-neutral);
+}
+
+.text-body {
+  color: var(--color-text-body);
+}
+
+.text-muted {
+  color: var(--color-text-muted);
+}
+
+.text-disabled {
+  color: var(--color-text-disabled);
+}
+
+.text-inverse {
+  color: var(--color-text-inverse);
+}
+
+.text-success {
+  color: var(--color-success);
+}
+
+.text-warning {
+  color: var(--color-warning);
+}
+
+.text-error {
+  color: var(--color-error);
+}
+
+.text-info {
+  color: var(--color-info);
+}
+
+/* --- Background Colors --- */
+.bg-page {
+  background-color: var(--color-bg-page);
+}
+
+.bg-surface {
+  background-color: var(--color-bg-surface);
+}
+
+.bg-elevated {
+  background-color: var(--color-bg-elevated);
+}
+
+.bg-primary {
+  background-color: var(--color-primary);
+}
+
+.bg-secondary {
+  background-color: var(--color-secondary);
+}
+
+.bg-accent {
+  background-color: var(--color-accent);
+}
+
+.bg-success {
+  background-color: var(--color-success);
+}
+
+.bg-warning {
+  background-color: var(--color-warning);
+}
+
+.bg-error {
+  background-color: var(--color-error);
+}
+
+.bg-info {
+  background-color: var(--color-info);
+}
+
+.bg-disabled {
+  background-color: var(--color-disabled-bg);
+}
+
+.bg-inverse {
+  background-color: var(--color-bg-inverse);
+}
+
+/* --- Border Colors --- */
+.border {
+  border: 1px solid var(--color-border);
+}
+
+.border-divider {
+  border-color: var(--color-divider);
+}
+
+.border-primary {
+  border-color: var(--color-primary);
+}
+
+.border-secondary {
+  border-color: var(--color-secondary);
+}
+
+.border-accent {
+  border-color: var(--color-accent);
+}
+
+.border-success {
+  border-color: var(--color-success);
+}
+
+.border-warning {
+  border-color: var(--color-warning);
+}
+
+.border-error {
+  border-color: var(--color-error);
+}
+
+.border-info {
+  border-color: var(--color-info);
 }
 
 body {
