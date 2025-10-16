@@ -1,4 +1,5 @@
 import Button from "../components/ui/Button";
+import TextInput from "../components/ui/TextInput";
 
 function TestPage() {
     return (
@@ -27,6 +28,14 @@ function TestPage() {
                 <Button>
                     Play
                 </Button>
+                <TextInput
+                    label="Email"
+                    type="email"
+                    helperText="We'll never share your email."
+                    variant="primaryLight"
+                    icon={<i className="bi bi-envelope"></i>}
+                    inputSize="md"                
+                />
                 <div className="color-row">
                     <div style={{ backgroundColor: "var(--color-neutral-light)" }}>Neutral Light</div>
                     <div style={{ backgroundColor: "var(--color-neutral)" }}>Neutral</div>

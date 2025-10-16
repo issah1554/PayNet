@@ -1,0 +1,223 @@
+:root {
+    --bg: #fff;
+    --text: #1f2937;
+    --muted: #6b7280;
+    --radius: 5px;
+    --label-scale: 0.85;
+}
+
+.field {
+    position: relative;
+    margin: 0.3rem 0;
+}
+
+/* Wrap input and icon together */
+.inputWrapper {
+    position: relative;
+}
+
+/* Base input */
+.input {
+    width: 100%;
+    padding: 1.125rem 0.875rem 0.875rem;
+    border: 1px solid var(--border, #cbd5e1);
+    border-radius: var(--radius);
+    background: transparent;
+    color: var(--text);
+    font: inherit;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    /* box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4); */
+}
+
+.input::placeholder {
+    color: transparent;
+}
+
+.input:hover {
+    border-color: var(--border-hover, #94a3b8);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+.field:has(.input:focus) .input {
+    border-color: var(--border-focus);
+    box-shadow: 0 0 0 3px rgba(var(--border-focus-rgb), 0.2),
+        0 4px 12px rgba(var(--border-focus-rgb), 0.15);
+}
+
+/* Floating label */
+.label {
+    position: absolute;
+    left: 0.65rem;
+    top: 0;
+    transform: translateY(1.05rem);
+    padding: 0 0.35rem;
+    color: var(--label-color, var(--muted));
+    pointer-events: none;
+    background: var(--neutral-100);
+    transform-origin: left center;
+    transition: transform 0.18s ease, color 0.18s ease, background 0.18s ease;
+    z-index: 1;
+    line-height: 1.1;
+    border-radius: 6px;
+}
+
+.field:has(.input:focus) .label,
+.input:not(:placeholder-shown)+.label {
+    transform: translateY(-50%) scale(var(--label-scale));
+    color: var(--label-focus-color, var(--db-primary));
+}
+
+.help {
+    font-size: 0.875rem;
+    color: var(--muted);
+    margin-top: 0.35rem;
+}
+
+/* --- Theme Variants --- */
+.primary {
+    --border: var(--db-primary);
+    --border-focus: var(--db-primary);
+    --border-focus-rgb: var(--db-primary-rgb);
+    --label-color: var(--db-secondary);
+    --label-focus-color: var(--db-primary);
+}
+
+.primaryLight {
+    --border: var(--db-primary-light);
+    --border-focus: var(--db-primary-light);
+    --border-focus-rgb: var(--db-primary-light-rgb);
+    --label-color: var(--db-secondary);
+    --label-focus-color: var(--db-primary-light);
+}
+
+.light {
+    --border: var(--bs-light);
+    --border-focus: var(--bs-light);
+    --border-focus-rgb: var(--bs-light-rgb);
+    --label-color: var(--bs-secondary);
+    --label-focus-color: var(--bs-light);
+}
+
+.light2 {
+    --border: var(--db-light2);
+    --border-focus: var(--db-light2);
+    --border-focus-rgb: var(--db-light2-rgb);
+    --label-color: var(--db-secondary);
+    --label-focus-color: var(--db-light2);
+}
+
+.secondary {
+    --border: var(--db-secondary);
+    --border-focus: var(--db-secondary);
+    --border-focus-rgb: var(--db-secondary-rgb);
+    --label-color: var(--db-secondary);
+    --label-focus-color: var(--db-secondary);
+}
+
+/* --- Status Variants --- */
+.success {
+    --border: #16a34a;
+    --border-focus: #16a34a;
+    --border-focus-rgb: 22, 163, 74;
+    --label-color: #15803d;
+    --label-focus-color: #16a34a;
+    --muted: #15803d;
+}
+
+.info {
+    --border: #2563eb;
+    --border-focus: #2563eb;
+    --border-focus-rgb: 37, 99, 235;
+    --label-color: #1d4ed8;
+    --label-focus-color: #2563eb;
+    --muted: #1d4ed8;
+}
+
+.warning {
+    --border: #d97706;
+    --border-focus: #d97706;
+    --border-focus-rgb: 217, 119, 6;
+    --label-color: #b45309;
+    --label-focus-color: #d97706;
+    --muted: #b45309;
+}
+
+/* --- Icon (always right) --- */
+.icon {
+    position: absolute;
+    top: 50%;
+    right: 0.75rem;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    color: var(--db-secondary, #6E8387);
+    z-index: 2;
+}
+
+.toggle {
+    cursor: pointer;
+}
+
+/* Extra padding for right icon */
+.iconRight .input {
+    padding-right: 2.25rem;
+}
+
+/* --- Sizes --- */
+.xs .input {
+    padding: 0.375rem 0.5rem 0.375rem;
+    font-size: 0.625rem;
+}
+
+.sm .input {
+    padding: 0.5rem 0.625rem 0.5rem;
+    font-size: 0.75rem;
+}
+
+.md .input {
+    padding: 0.775rem 0.775rem 1.2rem;
+    font-size: 0.775rem;
+}
+
+.lg .input {
+    padding: 1.125rem 1rem 1.125rem;
+    font-size: 1rem;
+}
+
+.xl .input {
+    padding: 1.5rem 1.25rem 1.5rem;
+    font-size: 1.125rem;
+}
+
+/* Adjust label transform for different sizes */
+.xs .label {
+    transform: translateY(0.6rem);
+}
+
+.sm .label {
+    transform: translateY(0.75rem);
+}
+
+.md .label {
+    transform: translateY(1.05rem);
+}
+
+.lg .label {
+    transform: translateY(1.125rem);
+}
+
+.xl .label {
+    transform: translateY(1.5rem);
+}
+
+/* Adjust right icon vertical position per input size */
+.xs .icon,
+.sm .icon {
+    top: 50%;
+}
+
+.md .icon,
+.lg .icon,
+.xl .icon {
+    top: 50%;
+}
