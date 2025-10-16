@@ -45,6 +45,7 @@
   --color-disabled-bg: var(--neutral-100);
 
   --color-border: var(--neutral-200);
+  --color-outline: var(--color-primary);
   --color-divider: var(--neutral-300);
 
   --color-text-primary: var(--color-primary);
@@ -135,7 +136,7 @@
 }
 
 /* --- Background Colors --- */
-.bg-page , .bg-primary {
+.bg-page, .bg-primary {
   background-color: var(--color-bg-page) !important;
 }
 

@@ -37,7 +37,6 @@ export default function LoginForm({ onLogin, loading = false, error }: LoginForm
         <OutlinedTextField
           label="Email"
           type="email"
-          variant="secondary"
           icon={<i className="bi bi-envelope"></i>}
           inputSize="md"
           name="email"
@@ -45,14 +44,16 @@ export default function LoginForm({ onLogin, loading = false, error }: LoginForm
           onChange={e => setEmail(e.target.value)}
         />
 
-        <OutlinedTextField
-          label="Password"
-          type="password"
-          variant="secondary"
-          inputSize="md"
-          name="password"
-          onChange={e => setPassword(e.target.value)}
-        />
+        <div className="py-3">
+          <OutlinedTextField
+            label="Password"
+            type="password"
+            inputSize="md"
+            name="password"
+            onChange={e => setPassword(e.target.value)}
+          />
+
+        </div>
         <div className="d-flex justify-content-between mb-3">
           <div className="form-check">
             <input
