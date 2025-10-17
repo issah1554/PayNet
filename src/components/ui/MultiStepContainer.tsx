@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Button from "./Button";
 
 interface Step {
     title: string;
@@ -27,9 +28,9 @@ export default function MultiStepContainer({ steps, onSubmit }: MultiStepContain
 
     return (
         <div className="container-sm mt-5">
-            <div className="card border-0 shadow-sm rounded-4 overflow-hidden">
+            <div className="card border-0 rounded-4 overflow-hidden">
                 {/* Step Header */}
-                <div className="card-header bg-light border-0 px-4 py-3">
+                <div className="card-header  border-0 px-3 py-3">
                     <div className="d-flex justify-content-between align-items-center flex-wrap">
                         {steps.map((step, i) => (
                             <div key={i} className="d-flex align-items-center">
@@ -45,7 +46,7 @@ export default function MultiStepContainer({ steps, onSubmit }: MultiStepContain
                                     disabled={i > currentStep}
                                 >
                                     <div
-                                        className={`rounded-circle d-flex align-items-center justify-content-center border ${i === currentStep
+                                        className={`rounded d-flex align-items-center justify-content-center border ${i === currentStep
                                                 ? "bg-primary-subtle border-primary text-primary"
                                                 : i < currentStep
                                                     ? "bg-success-subtle border-success text-success"
@@ -71,12 +72,12 @@ export default function MultiStepContainer({ steps, onSubmit }: MultiStepContain
                 </div>
 
                 {/* Step Content */}
-                <div className="card-body px-5 py-4">
+                <div className="card-body px-4 py-4">
                     {steps[currentStep].content}
                 </div>
 
                 {/* Footer */}
-                <div className="card-footer bg-white border-0 px-5 py-3 d-flex justify-content-between">
+                <div className="card-footer bg-white border-0 px-4 py-3 d-flex justify-content-between">
                     <button
                         type="button"
                         onClick={prev}
@@ -86,12 +87,7 @@ export default function MultiStepContainer({ steps, onSubmit }: MultiStepContain
                         <i className="bi bi-arrow-left me-2"></i> Previous
                     </button>
 
-                    <button
-                        type="button"
-                        onClick={next}
-                        className={`btn ${currentStep === totalSteps - 1 ? "btn-success" : "btn-primary"
-                            }`}
-                    >
+                    <Button onClick={next} >
                         {currentStep === totalSteps - 1 ? (
                             <>
                                 <i className="bi bi-check2-circle me-2"></i> Submit
@@ -101,7 +97,7 @@ export default function MultiStepContainer({ steps, onSubmit }: MultiStepContain
                                 Next <i className="bi bi-arrow-right ms-2"></i>
                             </>
                         )}
-                    </button>
+                    </Button>
                 </div>
             </div>
         </div>

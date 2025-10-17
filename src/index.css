@@ -81,6 +81,17 @@
   /* === Transparency Utilities === */
   --opacity-disabled: 0.6;
   --opacity-overlay: 0.4;
+
+
+  /* === Bootstrap Overides Utilities === */
+  --bs-primary: #996633;
+  --bs-primary-rgb: 153, 102, 51;
+
+  /* override Bootstrap subtle background */
+  --bs-primary-bg-subtle: rgba(var(--bs-primary-rgb), 0.15);
+  --bs-primary-border-subtle: rgba(var(--bs-primary-rgb), 0.3);
+  --bs-primary-text-emphasis: var(--bs-primary);
+
 }
 
 
