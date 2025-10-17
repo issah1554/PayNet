@@ -35,57 +35,106 @@ export default function WelcomePage() {
                 icon: <i className="bi bi-credit-card fs-4"></i>,
                 content: (
                   <div>
-                    <h5 className="mb-3 fw-semibold text-primary">Choose Your Plan</h5>
-                    <div className="row g-3">
+                    <h5 className="mb-3 fw-semibold text-primary">Choose Your Internet Package</h5>
+                    <p className="text-muted small mb-4">
+                      Select your preferred internet plan. Prices are in Tanzanian Shillings (TZS) and include data limits.
+                    </p>
+
+                    <div className="row g-4">
                       {[
-                        { name: "Basic", price: "$5/mo", desc: "Starter features" },
-                        { name: "Standard", price: "$10/mo", desc: "Most popular choice" },
-                        { name: "Premium", price: "$20/mo", desc: "All features" },
+                        {
+                          name: "Basic",
+                          price: "TZS 1,000",
+                          limit: "500 MB",
+                          duration: "per hour",
+                          desc: "Light browsing, email, and messaging"
+                        },
+                        {
+                          name: "Standard",
+                          price: "TZS 3,000",
+                          limit: "2 GB",
+                          duration: "per day",
+                          desc: "Streaming, social media, and regular work use"
+                        },
+                        {
+                          name: "Premium",
+                          price: "TZS 15,000",
+                          limit: "10 GB",
+                          duration: "per week",
+                          desc: "High-speed access with extended data limit"
+                        },
                       ].map((plan) => (
                         <div className="col-12 col-md-4" key={plan.name}>
                           <div
-                            className={`card shadow-sm border-2 text-center p-3 h-100 cursor-pointer transition
-                              ${selectedPlan === plan.name
+                            className={`card shadow-sm border-2 text-center p-4 h-100 transition ${selectedPlan === plan.name
                                 ? "border-primary bg-primary-subtle"
                                 : "border-0 bg-white"
                               }`}
                             onClick={() => setSelectedPlan(plan.name)}
-                            style={{ cursor: "pointer" }}
+                            style={{ cursor: "pointer", minHeight: "220px" }}
                           >
-                            <h6 className="fw-bold mb-1">{plan.name}</h6>
+                            <h6 className="fw-bold mb-2">{plan.name}</h6>
                             <p className="text-muted small mb-1">{plan.desc}</p>
-                            <p className="fw-semibold text-primary mb-0">{plan.price}</p>
+                            <p className="fw-semibold text-primary mb-1">{plan.price} / {plan.duration}</p>
+                            <p className="text-secondary small mb-0">Data Limit: {plan.limit}</p>
                           </div>
                         </div>
                       ))}
                     </div>
                   </div>
                 ),
-              },
+              }
+,
               {
                 title: "Payment Method",
                 icon: <i className="bi bi-wallet2 fs-4"></i>,
                 content: (
                   <div>
-                    <h5 className="mb-3 fw-semibold text-primary">Choose Payment Method</h5>
-                    <div className="row g-3">
+                    <h5 className="mb-3 fw-semibold text-primary">Choose Your Payment Method</h5>
+                    <p className="text-muted small mb-4">
+                      Select a payment option to complete your internet package purchase. All prices are in TZS.
+                    </p>
+                    <div className="row g-4">
                       {[
-                        { name: "M-Pesa", icon: "bi-phone-fill", color: "text-success" },
-                        { name: "Airtel Money", icon: "bi-wifi", color: "text-danger" },
-                        { name: "HaloPesa", icon: "bi-broadcast", color: "text-warning" },
+                        {
+                          name: "M-Pesa",
+                          img: "/mpesa-logo.png",
+                          desc: "Pay quickly via Safaricom M-Pesa. Supports instant transfers and mobile receipts.",
+                        },
+                        {
+                          name: "Airtel Money",
+                          img: "/airtelmoney-logo.png",
+                          desc: "Use Airtel Money for secure payments directly from your Airtel wallet.",
+                        },
+                        {
+                          name: "HaloPesa",
+                          img: "/halopesa-logo.png",
+                          desc: "HaloPesa offers convenient mobile payment options for daily internet packages.",
+                        },
                       ].map((method) => (
                         <div className="col-12 col-md-4" key={method.name}>
                           <div
-                            className={`card shadow-sm border-2 text-center p-3 h-100 transition
-                              ${selectedMethod === method.name
-                                ? "border-primary bg-primary-subtle"
-                                : "border-0 bg-white"
+                            className={`card shadow-sm border-2 text-center p-4 h-100 transition ${selectedMethod === method.name
+                              ? "border-primary bg-primary-subtle"
+                              : "border-0 bg-white"
                               }`}
                             onClick={() => setSelectedMethod(method.name)}
-                            style={{ cursor: "pointer" }}
+                            style={{ cursor: "pointer", minHeight: "220px" }}
                           >
-                            <i className={`bi ${method.icon} ${method.color} fs-3 mb-2`}></i>
-                            <h6 className="fw-semibold mb-0">{method.name}</h6>
+                            <div className="d-flex justify-content-center align-items-center mb-3">
+                              <img
+                                src={method.img}
+                                alt={method.name}
+                                className="img-fluid"
+                                style={{
+                                  width: "100px",
+                                  height: "60px",
+                                  objectFit: "contain",
+                                }}
+                              />
+                            </div>
+                            <h6 className="fw-semibold mb-1">{method.name}</h6>
+                            <p className="text-muted small mb-0">{method.desc}</p>
                           </div>
                         </div>
                       ))}

@@ -28,15 +28,15 @@ export default function MultiStepContainer({ steps, onSubmit }: MultiStepContain
 
     return (
         <div className="container-sm mt-5">
-            <div className="card border-0 rounded-4 overflow-hidden">
+            <div className="card border-0 rounded-4 overflow-hidden bg-transparent">
                 {/* Step Header */}
-                <div className="card-header  border-0 px-3 py-3">
+                <div className="card-header  border-0 px-3 py-3 bg-transparent">
                     <div className="d-flex justify-content-between align-items-center flex-wrap">
                         {steps.map((step, i) => (
                             <div key={i} className="d-flex align-items-center">
                                 <button
                                     type="button"
-                                    className={`btn d-flex flex-column align-items-center border-0 bg-transparent position-relative ${i === currentStep
+                                    className={`btn d-flex flex-column align-items-center border-0  position-relative ${i === currentStep
                                             ? "text-primary fw-semibold"
                                             : i < currentStep
                                                 ? "text-success"
@@ -77,7 +77,7 @@ export default function MultiStepContainer({ steps, onSubmit }: MultiStepContain
                 </div>
 
                 {/* Footer */}
-                <div className="card-footer bg-white border-0 px-4 py-3 d-flex justify-content-between">
+                <div className="card-footer bg-white border-0 px-4 py-3 d-flex justify-content-between bg-transparent">
                     <button
                         type="button"
                         onClick={prev}
