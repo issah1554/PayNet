@@ -36,8 +36,8 @@ export default function LoginForm({ onLogin, loading = false, error }: LoginForm
         <form onSubmit={handleSubmit} style={{ display: "grid" }}>
           <OutlinedTextField
             label="Email"
-            type="email"
-            variant="secondary"
+            type="text"
+            variant="primary"
             icon={<i className="bi bi-envelope"></i>}
             inputSize="md"
             name="email"
@@ -48,7 +48,7 @@ export default function LoginForm({ onLogin, loading = false, error }: LoginForm
           <OutlinedTextField
             label="Password"
             type="password"
-            variant="secondary"
+            variant="primary"
             inputSize="md"
             name="password"
             onChange={e => setPassword(e.target.value)}
@@ -77,7 +77,7 @@ export default function LoginForm({ onLogin, loading = false, error }: LoginForm
 
             {loading ? (
               <>
-                <span className="spinner-border spinner-border-sm me-2"aria-hidden="true"></span>
+                <span className="spinner-border spinner-border-sm me-2" aria-hidden="true"></span>
                 <span role="status">Logging in...</span>
               </>
             ) : (

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import MultiStepContainer from "../../components/ui/MultiStepContainer";
 import TextInput from "../../components/ui/TextInput";
+import { Link } from "react-router-dom";
 
 export default function WelcomePage() {
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
@@ -14,8 +15,12 @@ export default function WelcomePage() {
           className="position-absolute top-0 start-0 m-4 fw-bold text-primary fs-4"
           style={{ letterSpacing: "0.5px" }}
         >
-          PayNet
+          <div className="mt-2">
+            <img src="/wifi-icon.png"  alt="PayNet Logo" style={{ width: "50px", height: "50px", objectFit: "contain" }} />  PayNet
+
+          </div>
         </div>
+
         <img
           src="/payment-cover.png"
           alt="Welcome Cover"
@@ -27,6 +32,13 @@ export default function WelcomePage() {
       {/* Right Section — Multi-Step Form */}
       <div className="col-12 col-md-6 d-flex justify-content-center align-items-center p-4">
         <div className="w-100" style={{ maxWidth: "700px" }}>
+          <div className="position-absolute top-0 end-0 m-4">
+            <Link to={"/auth/login"}>
+              <i className="bi bi-person-circle fs-4 text-primary me-2"></i>
+
+            </Link>
+          </div>
+
           <MultiStepContainer
             steps={[
 
@@ -67,8 +79,8 @@ export default function WelcomePage() {
                         <div className="col-12 col-md-4" key={plan.name}>
                           <div
                             className={`card shadow-sm border-2 text-center p-4 h-100 transition ${selectedPlan === plan.name
-                                ? "border-primary bg-primary-subtle"
-                                : "border-0 bg-white"
+                              ? "border-primary bg-primary-subtle"
+                              : "border-0 bg-white"
                               }`}
                             onClick={() => setSelectedPlan(plan.name)}
                             style={{ cursor: "pointer", minHeight: "220px" }}
@@ -84,7 +96,7 @@ export default function WelcomePage() {
                   </div>
                 ),
               }
-,
+              ,
               {
                 title: "Payment Method",
                 icon: <i className="bi bi-wallet2 fs-4"></i>,
@@ -149,10 +161,10 @@ export default function WelcomePage() {
                   <div>
                     <h5 className="mb-3 fw-semibold text-primary">Account Information</h5>
                     <div className="my-4">
-                      <TextInput label="Username" helperText="This is just a temporary name"/>
+                      <TextInput label="Username" helperText="This is just a temporary name" />
                     </div>
                     <div className="my-4">
-                      <TextInput label="Phone number" helperText="e.g. 07xxxxxxx" type="phone"/>
+                      <TextInput label="Phone number" helperText="e.g. 07xxxxxxx" type="phone" />
                     </div>
                   </div>
                 ),

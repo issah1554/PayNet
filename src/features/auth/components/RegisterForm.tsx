@@ -40,7 +40,7 @@ export default function RegisterForm({
   };
 
   return (
-    <div className="card shadow p-4" style={{ width: "100%", maxWidth: "400px" }}>
+    <div className="card shadow p-4" style={{ width: "100%"}}>
       <h3 className="text-center mb-4 text-primary">
         <i className="bi bi-person-plus"></i> Register
       </h3>
@@ -51,7 +51,7 @@ export default function RegisterForm({
         <OutlinedTextField
           label="First Name"
           type="text"
-          variant="secondary"
+          variant="primary"
           icon={<i className="bi bi-person"></i>}
           inputSize="md"
           name="firstName"
@@ -62,7 +62,7 @@ export default function RegisterForm({
         <OutlinedTextField
           label="Last Name"
           type="text"
-          variant="secondary"
+          variant="primary"
           icon={<i className="bi bi-person"></i>}
           inputSize="md"
           name="lastName"
@@ -73,7 +73,7 @@ export default function RegisterForm({
         <OutlinedTextField
           label="Email"
           type="email"
-          variant="secondary"
+          variant="primary"
           icon={<i className="bi bi-envelope"></i>}
           inputSize="md"
           name="email"
@@ -84,7 +84,7 @@ export default function RegisterForm({
         <OutlinedTextField
           label="Password"
           type="password"
-          variant="secondary"
+          variant="primary"
           inputSize="md"
           name="password"
           value={password}
@@ -94,7 +94,7 @@ export default function RegisterForm({
         <OutlinedTextField
           label="Confirm Password"
           type="password"
-          variant={passwordError ? "warning" : "secondary"}
+          variant={passwordError ? "warning" : "primary"}
           inputSize="md"
           name="confirmPassword"
           value={confirmPassword}

@@ -19,9 +19,9 @@ interface OutlinedTextFieldProps
     label: string;
     helperText?: string;
     variant?: ColorVariant;
-    icon?: ReactNode; // always right
-    inputSize?: SizeVariant; // renamed to avoid TS conflict
-    type?: "text" | "password" | "phone"; // added "phone"
+    icon?: ReactNode;
+    inputSize?: SizeVariant;
+    type?: "text" | "password" | "phone" | "email";
 }
 
 const TextInput: React.FC<OutlinedTextFieldProps> = ({
@@ -38,27 +38,39 @@ const TextInput: React.FC<OutlinedTextFieldProps> = ({
         id || `outlined-input-${Math.random().toString(36).substr(2, 9)}`;
 
     const [showPassword, setShowPassword] = useState(false);
-    const [phoneValue, setPhoneValue] = useState(""); // for phone formatting
+    const [phoneValue, setPhoneValue] = useState("");
+    const [emailError, setEmailError] = useState<string | null>(null);
+    const [emailValue, setEmailValue] = useState("");
 
     const isPassword = type === "password";
     const isPhone = type === "phone";
+    const isEmail = type === "email";
 
-    const effectiveType = isPassword && showPassword ? "text" : isPhone ? "text" : type;
+    const effectiveType =
+        isPassword && showPassword ? "text" : isPhone ? "text" : type;
 
     const togglePassword = () => setShowPassword((prev) => !prev);
 
-    // Phone input formatting
     const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        let digits = e.target.value.replace(/\D/g, "").slice(0, 10); // max 10 digits
+        let digits = e.target.value.replace(/\D/g, "").slice(0, 10);
         let formatted = digits;
-
         if (digits.length > 4 && digits.length <= 7) {
             formatted = `${digits.slice(0, 4)} ${digits.slice(4)}`;
         } else if (digits.length > 7) {
             formatted = `${digits.slice(0, 4)} ${digits.slice(4, 7)} ${digits.slice(7)}`;
         }
-
         setPhoneValue(formatted);
+    };
+
+    const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setEmailValue(e.target.value);
+        props.onChange?.(e);
+    };
+
+    const handleEmailBlur = () => {
+        if (!emailValue) return setEmailError(null);
+        const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailValue);
+        setEmailError(valid ? null : "Invalid email address");
     };
 
     return (
@@ -70,9 +82,12 @@ const TextInput: React.FC<OutlinedTextFieldProps> = ({
                     id={inputId}
                     placeholder=" "
                     type={effectiveType}
-                    className={styles.input}
-                    value={isPhone ? phoneValue : props.value}
-                    onChange={isPhone ? handlePhoneChange : props.onChange}
+                    className={`${styles.input} ${emailError ? styles.error : ""}`}
+                    value={isPhone ? phoneValue : isEmail ? emailValue : props.value}
+                    onChange={
+                        isPhone ? handlePhoneChange : isEmail ? handleEmailChange : props.onChange
+                    }
+                    onBlur={isEmail ? handleEmailBlur : props.onBlur}
                     {...props}
                 />
 
@@ -96,7 +111,9 @@ const TextInput: React.FC<OutlinedTextFieldProps> = ({
                 )}
             </div>
 
-            {helperText && <div className={styles.help}>{helperText}</div>}
+            <div className={styles.help}>
+                {emailError ? emailError : helperText}
+            </div>
         </div>
     );
 };
