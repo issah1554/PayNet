@@ -35,9 +35,9 @@ export default function LoginForm({ onLogin, loading = false, error }: LoginForm
 
       <form onSubmit={handleSubmit} style={{ display: "grid" }}>
         <OutlinedTextField
-          label="Email"
-          type="email"
-          icon={<i className="bi bi-envelope"></i>}
+          label="Username"
+          type="text"
+          icon={<i className="bi bi-person"></i>}
           inputSize="md"
           name="email"
           value={email}
@@ -46,8 +46,9 @@ export default function LoginForm({ onLogin, loading = false, error }: LoginForm
 
         <div className="py-3">
           <OutlinedTextField
-            label="Password"
-            type="password"
+            label="Phone Number"
+            type="text"
+            icon={<i className="bi bi-telephone"></i>}
             inputSize="md"
             name="password"
             onChange={e => setPassword(e.target.value)}
