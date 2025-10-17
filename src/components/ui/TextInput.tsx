@@ -21,6 +21,7 @@ interface OutlinedTextFieldProps
     variant?: ColorVariant;
     icon?: ReactNode; // always right
     inputSize?: SizeVariant; // renamed to avoid TS conflict
+    type?: "text" | "password" | "phone"; // added "phone"
 }
 
 const TextInput: React.FC<OutlinedTextFieldProps> = ({
@@ -37,11 +38,28 @@ const TextInput: React.FC<OutlinedTextFieldProps> = ({
         id || `outlined-input-${Math.random().toString(36).substr(2, 9)}`;
 
     const [showPassword, setShowPassword] = useState(false);
-    const isPassword = type === "password";
+    const [phoneValue, setPhoneValue] = useState(""); // for phone formatting
 
-    const effectiveType = isPassword && showPassword ? "text" : type;
+    const isPassword = type === "password";
+    const isPhone = type === "phone";
+
+    const effectiveType = isPassword && showPassword ? "text" : isPhone ? "text" : type;
 
     const togglePassword = () => setShowPassword((prev) => !prev);
+
+    // Phone input formatting
+    const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        let digits = e.target.value.replace(/\D/g, "").slice(0, 10); // max 10 digits
+        let formatted = digits;
+
+        if (digits.length > 4 && digits.length <= 7) {
+            formatted = `${digits.slice(0, 4)} ${digits.slice(4)}`;
+        } else if (digits.length > 7) {
+            formatted = `${digits.slice(0, 4)} ${digits.slice(4, 7)} ${digits.slice(7)}`;
+        }
+
+        setPhoneValue(formatted);
+    };
 
     return (
         <div
@@ -53,6 +71,8 @@ const TextInput: React.FC<OutlinedTextFieldProps> = ({
                     placeholder=" "
                     type={effectiveType}
                     className={styles.input}
+                    value={isPhone ? phoneValue : props.value}
+                    onChange={isPhone ? handlePhoneChange : props.onChange}
                     {...props}
                 />
 
