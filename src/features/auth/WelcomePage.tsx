@@ -11,15 +11,17 @@ export default function WelcomePage() {
     <div className="d-flex vh-100 bg-light">
       {/* Left Section — Cover Image */}
       <div className="d-none d-md-flex col-md-6 bg-body-secondary position-relative justify-content-center align-items-center overflow-hidden">
-        <div
-          className="position-absolute top-0 start-0 m-4 fw-bold text-primary fs-4"
-          style={{ letterSpacing: "0.5px" }}
-        >
-          <div className="mt-2">
-            <img src="/wifi-icon.png"  alt="PayNet Logo" style={{ width: "50px", height: "50px", objectFit: "contain" }} />  PayNet
+        <Link to={"/"}>
+          <div
+            className="position-absolute top-0 start-0 m-4 fw-bold text-primary fs-4 cursor-pointer"
+            style={{ letterSpacing: "0.5px" }}
+          >
+            <div className="mt-2">
+              <img src="/wifi-icon.png" alt="PayNet Logo" style={{ width: "50px", height: "50px", objectFit: "contain" }} />  PayNet
 
+            </div>
           </div>
-        </div>
+        </Link>
 
         <img
           src="/payment-cover.png"

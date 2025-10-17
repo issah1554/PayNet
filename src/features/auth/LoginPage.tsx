@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import LoginForm from "./components/LoginForm";
 
 export default function LoginPage() {
@@ -5,19 +6,17 @@ export default function LoginPage() {
     <div className="d-flex vh-100 bg-light">
       {/* Left Section — Cover Image */}
       <div className="d-none d-md-flex col-md-8 bg-body-secondary position-relative justify-content-center align-items-center overflow-hidden">
-        <div
-          className="position-absolute top-0 start-0 m-4 fw-bold text-primary fs-4"
-          style={{ letterSpacing: "0.5px" }}
-        >
-          <div className="d-flex align-items-center mt-2 gap-2">
-            <img
-              src="/wifi-icon.png"
-              alt="PayNet Logo"
-              style={{ width: "40px", height: "40px", objectFit: "contain" }}
-            />
-            <span>PayNet</span>
+        <Link to={"/"}>
+          <div
+            className="position-absolute top-0 start-0 m-4 fw-bold text-primary fs-4 cursor-pointer"
+            style={{ letterSpacing: "0.5px" }}
+          >
+            <div className="mt-2">
+              <img src="/wifi-icon.png" alt="PayNet Logo" style={{ width: "50px", height: "50px", objectFit: "contain" }} />  PayNet
+
+            </div>
           </div>
-        </div>
+        </Link>
 
         <img
           src="/payment-cover.png"
