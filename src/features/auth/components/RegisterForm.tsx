@@ -38,7 +38,7 @@ export default function RegisterForm({
   };
 
   return (
-    <div className="card border-0 bg-transparent p-0  p-md-4 step-animate" style={{ width: "100%" }}>
+    <div className="card border-0 bg-transparent p-0  p-md-4 animetion-zoom-in" style={{ width: "100%" }}>
       <div className="card-body p-0">
         <div className="mb-4">
           <h3 className="text-primary fw-semibold">
