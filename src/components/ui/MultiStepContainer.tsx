@@ -6,7 +6,7 @@ interface Step {
     subtitle?: string;
     icon?: React.ReactNode;
     content: React.ReactNode;
-    canProceed?: boolean; // new flag
+    canProceed?: boolean;
 }
 
 interface MultiStepContainerProps {
@@ -40,58 +40,45 @@ export default function MultiStepContainer({ steps, onSubmit }: MultiStepContain
                                 <button
                                     type="button"
                                     className={`bg-light d-flex flex-column align-items-center border-0 position-relative ${i === currentStep
-                                            ? "text-primary fw-semibold"
-                                            : i < currentStep
-                                                ? "text-success"
-                                                : "text-muted"
+                                        ? "text-primary fw-semibold"
+                                        : i < currentStep
+                                            ? "text-success"
+                                            : "text-muted"
                                         }`}
-                                    disabled // disable all direct jumps
+                                    disabled
                                 >
                                     <div
                                         className={`rounded d-flex align-items-center justify-content-center border ${i === currentStep
-                                                ? "bg-primary-subtle border-primary text-primary"
-                                                : i < currentStep
-                                                    ? "bg-success-subtle border-success text-success"
-                                                    : "bg-light border-secondary text-secondary"
+                                            ? "bg-primary-subtle border-primary text-primary"
+                                            : i < currentStep
+                                                ? "bg-success-subtle border-success text-success"
+                                                : "bg-light border-secondary text-secondary"
                                             }`}
                                         style={{ width: "42px", height: "42px" }}
                                     >
                                         {step.icon || i + 1}
                                     </div>
-
                                     <span>{step.title}</span>
-                                    {step.subtitle && (
-                                        <small className="text-secondary">{step.subtitle}</small>
-                                    )}
+                                    {step.subtitle && <small className="text-secondary">{step.subtitle}</small>}
                                 </button>
-
-                                {i < totalSteps - 1 && (
-                                    <i className="bi bi-chevron-right text-muted mx-2"></i>
-                                )}
+                                {i < totalSteps - 1 && <i className="bi bi-chevron-right text-muted mx-2"></i>}
                             </div>
                         ))}
                     </div>
                 </div>
 
-                {/* Step Content */}
-                <div className="card-body px-0 py-4">{steps[currentStep].content}</div>
+                {/* Step Content with fade animation */}
+                <div className="card-body px-0 py-4 step-animate" key={currentStep}>
+                    {steps[currentStep].content}
+                </div>
 
                 {/* Footer */}
                 <div className="card-footer bg-white border-0 px-4 py-3 d-flex justify-content-between bg-transparent">
-                    <button
-                        type="button"
-                        onClick={prev}
-                        className="btn btn-outline-secondary"
-                        disabled={currentStep === 0}
-                    >
+                    <button type="button" onClick={prev} className="btn btn-outline-secondary" disabled={currentStep === 0}>
                         <i className="bi bi-arrow-left me-2"></i> Previous
                     </button>
 
-                    <Button
-                        onClick={next}
-                        color={currentStep === totalSteps - 1 ? "success" : "primary"}
-                        disabled={!steps[currentStep].canProceed} // disable until filled
-                    >
+                    <Button onClick={next} color={currentStep === totalSteps - 1 ? "success" : "primary"} disabled={!steps[currentStep].canProceed}>
                         {currentStep === totalSteps - 1 ? (
                             <>
                                 <i className="bi bi-check2-circle me-2"></i> Submit
@@ -104,6 +91,7 @@ export default function MultiStepContainer({ steps, onSubmit }: MultiStepContain
                     </Button>
                 </div>
             </div>
+
         </div>
     );
 }

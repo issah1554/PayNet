@@ -26,7 +26,7 @@ export default function ForgotPasswordForm({
 
   return (
     <div
-      className="card  bg-transparent border-0  p-0 p-md-4"
+      className="card  bg-transparent border-0  p-0 p-md-4 step-animate"
       style={{ width: "100%" }}
     >
       <h3 className="text-primary mb-4">
