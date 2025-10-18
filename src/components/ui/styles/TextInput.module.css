@@ -1,8 +1,5 @@
 :root {
-    --bg: #fff;
-    --text: #1f2937;
-    --muted: #6b7280;
-    --radius: 8px;
+    --radius: var(--bs-border-radius);
     --label-scale: 0.85;
 }
 
@@ -11,7 +8,7 @@
     margin: 0.3rem 0;
 }
 
-/* Wrap input and icon together */
+/* Wrapper */
 .inputWrapper {
     position: relative;
 }
@@ -20,14 +17,13 @@
 .input {
     width: 100%;
     padding: 1.125rem 0.875rem 0.875rem;
-    border: 1px solid #cbd5e1;
+    border: 1px solid var(--color-border);
     border-radius: var(--radius);
-    background: transparent;
-    color: var(--muted);
+    background: var(--color-bg-surface);
+    color: var(--color-text-body);
     font: inherit;
     outline: none;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    /* box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4); */
 }
 
 .input::placeholder {
@@ -35,15 +31,12 @@
 }
 
 .input:hover {
-    border-color: var(--border-hover, #94a3b8);
+    border-color: var(--color-primary-hover);
 }
 
 .field:has(.input:focus) .input {
-    border-color: var(--border-focus);
-    box-shadow: 0 0 0 3px rgba(var(--border-focus-rgb), 0.2),
-        0 4px 12px rgba(var(--border-focus-rgb), 0.15);
-    border: 2px solid var(--border, #cbd5e1);
-
+    border-color: var(--color-outline);
+    border: 2px solid var(--color-outline);
 }
 
 /* Floating label */
@@ -53,9 +46,9 @@
     top: 0;
     transform: translateY(1.05rem);
     padding: 0 0.35rem;
-    color: var(--label-color, var(--muted));
+    color: var(--color-text-muted);
     pointer-events: none;
-    background: var(--neutral-white);
+    background: var(--color-bg-surface);
     transform-origin: left center;
     transition: transform 0.18s ease, color 0.18s ease, background 0.18s ease;
     z-index: 1;
@@ -66,92 +59,90 @@
 .field:has(.input:focus) .label,
 .input:not(:placeholder-shown)+.label {
     transform: translateY(-50%) scale(var(--label-scale));
-    color: var(--label-focus-color, var(--db-primary));
+    color: var(--color-primary);
 }
 
 .help {
     font-size: 0.875rem;
-    color: var(--muted);
+    color: var(--color-text-muted);
     margin-top: 0.35rem;
 }
 
-/* --- Theme Variants --- */
+/* === THEME VARIANTS === */
 .primary {
     --border: var(--color-primary);
     --border-focus: var(--color-primary);
-    --border-focus-rgb: var(--color-primary);
+    --border-focus-rgb: var(--bs-primary-rgb);
     --label-focus-color: var(--color-primary);
 }
 
 .primaryLight {
-    --border: var(--db-primary-light);
-    --border-focus: var(--db-primary-light);
-    --border-focus-rgb: var(--db-primary-light-rgb);
-    --label-color: var(--db-secondary);
-    --label-focus-color: var(--db-primary-light);
+    --border: var(--color-primary-light);
+    --border-focus: var(--color-primary-light);
+    --border-focus-rgb: var(--bs-primary-rgb);
+    --label-focus-color: var(--color-primary-light);
 }
 
 .light {
-    --border: var(--bs-light);
-    --border-focus: var(--bs-light);
+    --border: var(--neutral-200);
+    --border-focus: var(--neutral-300);
     --border-focus-rgb: var(--bs-light-rgb);
-    --label-color: var(--bs-secondary);
-    --label-focus-color: var(--bs-light);
+    --label-focus-color: var(--neutral-500);
 }
 
 .light2 {
-    --border: var(--db-light2);
-    --border-focus: var(--db-light2);
-    --border-focus-rgb: var(--db-light2-rgb);
-    --label-color: var(--db-secondary);
-    --label-focus-color: var(--db-light2);
+    --border: var(--neutral-300);
+    --border-focus: var(--neutral-400);
+    --border-focus-rgb: var(--bs-light-rgb);
+    --label-focus-color: var(--neutral-600);
 }
 
 .secondary {
-    --border: var(--db-secondary);
-    --border-focus: var(--db-secondary);
-    --border-focus-rgb: var(--db-secondary-rgb);
-    --label-color: var(--db-secondary);
-    --label-focus-color: var(--db-secondary);
+    --border: var(--color-secondary);
+    --border-focus: var(--color-secondary-dark);
+    --border-focus-rgb: var(--bs-secondary-rgb);
+    --label-focus-color: var(--color-secondary);
 }
 
-/* --- Status Variants --- */
+/* === STATUS VARIANTS === */
 .success {
-    --border: #16a34a;
-    --border-focus: #16a34a;
-    --border-focus-rgb: 22, 163, 74;
-    --label-color: #15803d;
-    --label-focus-color: #16a34a;
-    --muted: #15803d;
+    --border: var(--color-success);
+    --border-focus: var(--color-success);
+    --border-focus-rgb: var(--bs-success-rgb);
+    --label-focus-color: var(--color-success);
+    --muted: var(--color-success);
 }
 
 .info {
-    --border: #2563eb;
-    --border-focus: #2563eb;
-    --border-focus-rgb: 37, 99, 235;
-    --label-color: #1d4ed8;
-    --label-focus-color: #2563eb;
-    --muted: #1d4ed8;
+    --border: var(--color-info);
+    --border-focus: var(--color-info);
+    --border-focus-rgb: var(--bs-info-rgb);
+    --label-focus-color: var(--color-info);
+    --muted: var(--color-info);
 }
 
 .warning {
-    --border: #d97706;
-    --border-focus: #d97706;
-    --border-focus-rgb: 217, 119, 6;
-    --label-color: #b45309;
-    --label-focus-color: #d97706;
-    --muted: #b45309;
+    --border: var(--color-warning);
+    --border-focus: var(--color-warning);
+    --border-focus-rgb: var(--bs-warning-rgb);
+    --label-focus-color: var(--color-warning);
+    --muted: var(--color-warning);
 }
 
-/* --- Icon (always right) --- */
+/* === ICONS === */
 .icon {
     position: absolute;
     top: 50%;
     right: 0.75rem;
     transform: translateY(-50%);
-    font-size: 1rem;
-    color: var(--db-secondary, #6E8387);
+    font-size: 1.2rem;
+    color: var(--color-text-muted);
     z-index: 2;
+}
+
+/* Icon color change on input focus */
+.field:has(.input:focus) .icon {
+    color: var(--label-focus-color, var(--color-primary));
 }
 
 .toggle {
@@ -163,7 +154,7 @@
     padding-right: 2.25rem;
 }
 
-/* --- Sizes --- */
+/* === SIZES === */
 .xs .input {
     padding: 0.375rem 0.5rem;
     font-size: 0.625rem;
@@ -189,7 +180,7 @@
     font-size: 1.3rem;
 }
 
-/* Adjust label transform for different sizes */
+/* Label transform per size */
 .xs .label {
     transform: translateY(0.6rem);
 }
@@ -210,12 +201,9 @@
     transform: translateY(1.5rem);
 }
 
-/* Adjust right icon vertical position per input size */
+/* Icon position per size */
 .xs .icon,
-.sm .icon {
-    top: 50%;
-}
-
+.sm .icon,
 .md .icon,
 .lg .icon,
 .xl .icon {

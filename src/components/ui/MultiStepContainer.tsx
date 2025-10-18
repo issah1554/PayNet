@@ -4,8 +4,9 @@ import Button from "./Button";
 interface Step {
     title: string;
     subtitle?: string;
-    icon?: React.ReactNode; // ← change this line
+    icon?: React.ReactNode;
     content: React.ReactNode;
+    canProceed?: boolean; // new flag
 }
 
 interface MultiStepContainerProps {
@@ -18,8 +19,10 @@ export default function MultiStepContainer({ steps, onSubmit }: MultiStepContain
     const totalSteps = steps.length;
 
     const next = () => {
-        if (currentStep < totalSteps - 1) setCurrentStep(currentStep + 1);
-        else onSubmit?.();
+        if (steps[currentStep].canProceed) {
+            if (currentStep < totalSteps - 1) setCurrentStep(currentStep + 1);
+            else onSubmit?.();
+        }
     };
 
     const prev = () => {
@@ -30,20 +33,19 @@ export default function MultiStepContainer({ steps, onSubmit }: MultiStepContain
         <div className="container-sm mt-5 px-0">
             <div className="card border-0 rounded-4 overflow-hidden bg-transparent">
                 {/* Step Header */}
-                <div className="card-header  border-0 px-0 py-3 bg-transparent">
+                <div className="card-header border-0 px-0 py-3 bg-transparent">
                     <div className="d-flex justify-content-between align-items-center flex-wrap">
                         {steps.map((step, i) => (
                             <div key={i} className="d-flex align-items-center">
                                 <button
                                     type="button"
-                                    className={`bg-light d-flex flex-column align-items-center border-0  position-relative ${i === currentStep
+                                    className={`bg-light d-flex flex-column align-items-center border-0 position-relative ${i === currentStep
                                             ? "text-primary fw-semibold"
                                             : i < currentStep
                                                 ? "text-success"
                                                 : "text-muted"
                                         }`}
-                                    onClick={() => i < currentStep && setCurrentStep(i)}
-                                    disabled={i > currentStep}
+                                    disabled // disable all direct jumps
                                 >
                                     <div
                                         className={`rounded d-flex align-items-center justify-content-center border ${i === currentStep
@@ -54,7 +56,7 @@ export default function MultiStepContainer({ steps, onSubmit }: MultiStepContain
                                             }`}
                                         style={{ width: "42px", height: "42px" }}
                                     >
-                                        {step.icon || i + 1}  {/* ← render directly */}
+                                        {step.icon || i + 1}
                                     </div>
 
                                     <span>{step.title}</span>
@@ -72,9 +74,7 @@ export default function MultiStepContainer({ steps, onSubmit }: MultiStepContain
                 </div>
 
                 {/* Step Content */}
-                <div className="card-body px-0 py-4">
-                    {steps[currentStep].content}
-                </div>
+                <div className="card-body px-0 py-4">{steps[currentStep].content}</div>
 
                 {/* Footer */}
                 <div className="card-footer bg-white border-0 px-4 py-3 d-flex justify-content-between bg-transparent">
@@ -90,6 +90,7 @@ export default function MultiStepContainer({ steps, onSubmit }: MultiStepContain
                     <Button
                         onClick={next}
                         color={currentStep === totalSteps - 1 ? "success" : "primary"}
+                        disabled={!steps[currentStep].canProceed} // disable until filled
                     >
                         {currentStep === totalSteps - 1 ? (
                             <>
@@ -101,7 +102,6 @@ export default function MultiStepContainer({ steps, onSubmit }: MultiStepContain
                             </>
                         )}
                     </Button>
-
                 </div>
             </div>
         </div>
