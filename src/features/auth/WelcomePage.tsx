@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MultiStepContainer from "../../components/ui/MultiStepContainer";
 import TextInput from "../../components/ui/TextInput";
 import AuthContainer from "./components/AuthContainer";
@@ -6,13 +6,22 @@ import AuthContainer from "./components/AuthContainer";
 export default function WelcomePage() {
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
   const [selectedMethod, setSelectedMethod] = useState<string | null>(null);
+  const [isMdUp, setIsMdUp] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMdUp(window.innerWidth >= 768);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
 
   return (
     <AuthContainer
       leftCol="col-md-6"
       rightCol="col-md-6"
-      rightClassName="d-flex justify-content-center align-items-center"
-      rightStyle={{ minHeight: "100vh", paddingTop: 0 }} 
+      rightClassName={isMdUp ? "d-flex justify-content-center align-items-center" : undefined}
+      rightStyle={isMdUp ? { minHeight: "100vh", paddingTop: 0 } : undefined}
       imageSrc="/payment-cover.png"
       logoSrc="/wifi-icon.png"
       appName="PayNet"
