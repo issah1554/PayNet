@@ -36,7 +36,7 @@ export default function MultiStepContainer({ steps, onSubmit }: MultiStepContain
                             <div key={i} className="d-flex align-items-center">
                                 <button
                                     type="button"
-                                    className={`btn d-flex flex-column align-items-center border-0  position-relative ${i === currentStep
+                                    className={`bg-light d-flex flex-column align-items-center border-0  position-relative ${i === currentStep
                                             ? "text-primary fw-semibold"
                                             : i < currentStep
                                                 ? "text-success"

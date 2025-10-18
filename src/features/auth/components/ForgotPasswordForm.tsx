@@ -26,7 +26,7 @@ export default function ForgotPasswordForm({
 
   return (
     <div
-      className="card  bg-transparent border-0  p-4"
+      className="card  bg-transparent border-0  p-0 p-md-4"
       style={{ width: "100%" }}
     >
       <h3 className="text-primary mb-4">
@@ -53,7 +53,7 @@ export default function ForgotPasswordForm({
             </>
           ) : (
             <>
-              <i className="bi bi-envelope me-2"></i> Send Reset Link
+              <i className="bi bi-envelope me-2"></i> Request Reset Link
             </>
           )}
         </Button>

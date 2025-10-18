@@ -55,6 +55,11 @@ export default function ForgotPasswordPage() {
 
       {/* Right Section — Forgot Password Form */}
       <div className="col-12 col-md-4 d-flex justify-content-center align-items-center p-4">
+        <div className="position-absolute top-0 end-0 m-4">
+          <Link to={"/"}>
+            <i className="bi bi-house fs-4 text-primary me-2"></i>
+          </Link>
+        </div>
         <div className="w-100" style={{ maxWidth: "700px" }}>
           <ForgotPasswordForm
             onSubmitEmail={handleSubmitEmail}

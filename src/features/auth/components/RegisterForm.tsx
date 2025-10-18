@@ -38,8 +38,8 @@ export default function RegisterForm({
   };
 
   return (
-    <div className="card border-0 bg-transparent p-4" style={{ width: "100%" }}>
-      <div className="card-body">
+    <div className="card border-0 bg-transparent p-0 p-md-4" style={{ width: "100%" }}>
+      <div className="card-body p-0">
         <div className="mb-4">
           <h3 className="text-primary fw-semibold">
             <i className="bi bi-person-plus me-2"></i>
