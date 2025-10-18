@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
-import Button from "../../../components/ui/Buttons";
-import OutlinedTextField from "../../../components/ui/FloatingLabelInput";
+import Button from "../../../components/ui/Button";
+import TextInput from "../../../components/ui/TextInput";
 import { Link } from "react-router-dom";
 
 interface ForgotPasswordFormProps {
@@ -26,23 +26,22 @@ export default function ForgotPasswordForm({
 
   return (
     <div
-      className="card shadow p-4"
-      style={{ width: "100%", maxWidth: "400px" }}
+      className="card  bg-transparent border-0  p-4"
+      style={{ width: "100%" }}
     >
-      <h3 className="text-center text-primary mb-4">
+      <h3 className="text-primary mb-4">
         <i className="bi bi-key"></i> Forgot Password
       </h3>
 
       <form onSubmit={handleSubmit} style={{ display: "grid" }}>
-        <OutlinedTextField
+        <TextInput
           label="Email"
+          labelBgColor="var(--bs-light)"
           type="email"
-          variant="secondary"
           icon={<i className="bi bi-envelope"></i>}
           inputSize="md"
           name="email"
         />
-
         <Button
           type="submit" fullWidth
           disabled={loading}

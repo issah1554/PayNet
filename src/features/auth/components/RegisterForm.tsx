@@ -20,107 +20,133 @@ export default function RegisterForm({
   loading,
   error,
 }: RegisterFormProps) {
-  const [firstName, setFirstName] = useState<string>("");
-  const [lastName, setLastName] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [confirmPassword, setConfirmPassword] = useState<string>("");
-  const [passwordError, setPasswordError] = useState<string>("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-
     if (password !== confirmPassword) {
       setPasswordError("Passwords do not match");
       return;
     }
-
-    setPasswordError(""); // Clear error
+    setPasswordError("");
     onRegister(firstName, lastName, email, password, confirmPassword);
   };
 
   return (
-    <div className="card shadow p-4" style={{ width: "100%"}}>
-      <h3 className="text-center mb-4 text-primary">
-        <i className="bi bi-person-plus"></i> Register
-      </h3>
+    <div className="card border-0 bg-transparent p-4" style={{ width: "100%" }}>
+      <div className="card-body">
+        <div className="mb-4">
+          <h3 className="text-primary fw-semibold">
+            <i className="bi bi-person-plus me-2"></i>
+            Create Your Account
+          </h3>
+          <p className="text-muted small mb-0">
+            Join our community and start managing your account with ease.
+          </p>
+        </div>
 
-      {error && <div className="alert alert-danger mb-3">{error}</div>}
+        {error && <div className="alert alert-danger mb-3">{error}</div>}
 
-      <form onSubmit={handleSubmit} style={{ display: "grid", gap: "1rem" }}>
-        <OutlinedTextField
-          label="First Name"
-          type="text"
-          variant="primary"
-          icon={<i className="bi bi-person"></i>}
-          inputSize="md"
-          name="firstName"
-          value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
-        />
+        <form onSubmit={handleSubmit} style={{ display: "grid", gap: "1rem" }}>
+          <div className="d-flex gap-2 justify-content-between">
+            <OutlinedTextField
+              label="First Name"
+              labelBgColor="var(--bs-light)"
+              type="text"
+              variant="primary"
+              icon={<i className="bi bi-person"></i>}
+              inputSize="md"
+              name="firstName"
+              placeholder="John"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              required
+            />
 
-        <OutlinedTextField
-          label="Last Name"
-          type="text"
-          variant="primary"
-          icon={<i className="bi bi-person"></i>}
-          inputSize="md"
-          name="lastName"
-          value={lastName}
-          onChange={(e) => setLastName(e.target.value)}
-        />
+            <OutlinedTextField
+              label="Last Name"
+              labelBgColor="var(--bs-light)"
+              type="text"
+              variant="primary"
+              icon={<i className="bi bi-person"></i>}
+              inputSize="md"
+              name="lastName"
+              placeholder="Doe"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              required
+            />
+          </div>
 
-        <OutlinedTextField
-          label="Email"
-          type="email"
-          variant="primary"
-          icon={<i className="bi bi-envelope"></i>}
-          inputSize="md"
-          name="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+          <OutlinedTextField
+            label="Email Address"
+            labelBgColor="var(--bs-light)"
+            type="email"
+            variant="primary"
+            icon={<i className="bi bi-envelope"></i>}
+            inputSize="md"
+            name="email"
+            placeholder="you@example.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
 
-        <OutlinedTextField
-          label="Password"
-          type="password"
-          variant="primary"
-          inputSize="md"
-          name="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+          <OutlinedTextField
+            label="Password"
+            labelBgColor="var(--bs-light)"
+            type="password"
+            variant="primary"
+            icon={<i className="bi bi-lock"></i>}
+            inputSize="md"
+            name="password"
+            placeholder="Enter a strong password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
 
-        <OutlinedTextField
-          label="Confirm Password"
-          type="password"
-          variant={passwordError ? "warning" : "primary"}
-          inputSize="md"
-          name="confirmPassword"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          helperText={passwordError}
-        />
+          <OutlinedTextField
+            label="Confirm Password"
+            labelBgColor="var(--bs-light)"
+            type="password"
+            variant={passwordError ? "warning" : "primary"}
+            icon={<i className="bi bi-lock-fill"></i>}
+            inputSize="md"
+            name="confirmPassword"
+            placeholder="Re-enter your password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            helperText={passwordError}
+            required
+          />
 
-        <Button type="submit" fullWidth disabled={loading}>
-          {loading ? (
-            <>
-              <span className="spinner-border spinner-border-sm me-2"></span>
-              Registering...
-            </>
-          ) : (
-            <>
-              <i className="bi bi-person-plus me-2"></i> Register
-            </>
-          )}
-        </Button>
-      </form>
+          <Button type="submit" fullWidth disabled={loading}>
+            {loading ? (
+              <>
+                <span className="spinner-border spinner-border-sm me-2"></span>
+                Creating your account...
+              </>
+            ) : (
+              <>
+                <i className="bi bi-person-plus me-2"></i>
+                Register
+              </>
+            )}
+          </Button>
+        </form>
 
-      <div className="mt-3 text-center">
-        <span>Already have an account? </span>
-        <Link to="/auth/login" className="text-decoration-none">
-          Login
-        </Link>
+        <div className="mt-4 text-center">
+          <span className="text-muted">Already have an account? </span>
+          <Link to="/auth/login" className="text-decoration-none text-primary fw-semibold">
+            Log in
+          </Link>
+        </div>
       </div>
     </div>
   );

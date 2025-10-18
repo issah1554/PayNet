@@ -157,16 +157,16 @@ export default function WelcomePage() {
                 ),
               },
               {
-                title: "Account",
-                icon: <i className="bi bi-person-circle fs-4"></i>,
+                title: "Phone",
+                icon: <i className="bi bi-telephone fs-4"></i>,
                 content: (
                   <div>
                     <h5 className="mb-3 fw-semibold text-primary">Account Information</h5>
                     <div className="my-4">
-                      <TextInput label="Username" helperText="This is just a temporary name" />
+                      <TextInput label="Username" labelBgColor="var(--bs-light)" helperText="This is just a temporary name" />
                     </div>
                     <div className="my-4">
-                      <TextInput label="Phone number" helperText="e.g. 07xxxxxxx" type="phone" />
+                      <TextInput label="Phone number" labelBgColor="var(--bs-light)" helperText="e.g. 07xxxxxxx" type="phone" />
                     </div>
                   </div>
                 ),

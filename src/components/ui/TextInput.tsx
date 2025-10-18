@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import type { InputHTMLAttributes, ReactNode } from "react";
+import type { InputHTMLAttributes, ReactNode, CSSProperties } from "react";
 import styles from "./styles/TextInput.module.css";
 
 type ColorVariant =
@@ -22,6 +22,7 @@ interface OutlinedTextFieldProps
     icon?: ReactNode;
     inputSize?: SizeVariant;
     type?: "text" | "password" | "phone" | "email";
+    labelBgColor?: string; // new prop for label background color
 }
 
 const TextInput: React.FC<OutlinedTextFieldProps> = ({
@@ -32,6 +33,7 @@ const TextInput: React.FC<OutlinedTextFieldProps> = ({
     variant = "primary",
     icon,
     inputSize = "md",
+    labelBgColor,
     ...props
 }) => {
     const inputId =
@@ -73,6 +75,10 @@ const TextInput: React.FC<OutlinedTextFieldProps> = ({
         setEmailError(valid ? null : "Invalid email address");
     };
 
+    const labelStyle: CSSProperties = labelBgColor
+        ? { backgroundColor: labelBgColor, padding: "0 0.3rem" }
+        : {};
+
     return (
         <div
             className={`${styles.field} ${styles[variant]} ${styles.iconRight} ${styles[inputSize]}`}
@@ -91,7 +97,7 @@ const TextInput: React.FC<OutlinedTextFieldProps> = ({
                     {...props}
                 />
 
-                <label htmlFor={inputId} className={styles.label}>
+                <label htmlFor={inputId} className={styles.label} style={labelStyle}>
                     {label}
                 </label>
 
