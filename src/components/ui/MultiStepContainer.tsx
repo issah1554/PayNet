@@ -27,10 +27,10 @@ export default function MultiStepContainer({ steps, onSubmit }: MultiStepContain
     };
 
     return (
-        <div className="container-sm mt-5">
+        <div className="container-sm mt-5 px-0">
             <div className="card border-0 rounded-4 overflow-hidden bg-transparent">
                 {/* Step Header */}
-                <div className="card-header  border-0 px-3 py-3 bg-transparent">
+                <div className="card-header  border-0 px-0 py-3 bg-transparent">
                     <div className="d-flex justify-content-between align-items-center flex-wrap">
                         {steps.map((step, i) => (
                             <div key={i} className="d-flex align-items-center">
@@ -72,7 +72,7 @@ export default function MultiStepContainer({ steps, onSubmit }: MultiStepContain
                 </div>
 
                 {/* Step Content */}
-                <div className="card-body px-4 py-4">
+                <div className="card-body px-0 py-4">
                     {steps[currentStep].content}
                 </div>
 

@@ -17,6 +17,8 @@ export default function RegisterPage() {
     <AuthContainer
       leftCol="col-md-8"
       rightCol="col-md-4"
+      rightClassName="d-flex justify-content-center align-items-center"
+      rightStyle={{ minHeight: "100vh", paddingTop: 0 }} 
       imageSrc="/payment-cover.png"
       logoSrc="/wifi-icon.png"
       appName="PayNet"
