@@ -87,7 +87,10 @@ export default function MultiStepContainer({ steps, onSubmit }: MultiStepContain
                         <i className="bi bi-arrow-left me-2"></i> Previous
                     </button>
 
-                    <Button onClick={next} >
+                    <Button
+                        onClick={next}
+                        color={currentStep === totalSteps - 1 ? "success" : "primary"}
+                    >
                         {currentStep === totalSteps - 1 ? (
                             <>
                                 <i className="bi bi-check2-circle me-2"></i> Submit
@@ -98,6 +101,7 @@ export default function MultiStepContainer({ steps, onSubmit }: MultiStepContain
                             </>
                         )}
                     </Button>
+
                 </div>
             </div>
         </div>

@@ -76,7 +76,7 @@ export default function WelcomePage() {
             ),
           },
           {
-            title: "Payment Method",
+            title: "Method",
             icon: <i className="bi bi-wallet2 fs-4"></i>,
             content: (
               <div>
