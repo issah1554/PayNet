@@ -20,13 +20,21 @@ export function usePlans() {
 export function usePaymentRequest() {
     const [data, setData] = useState<any>();
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
 
-    async function makePayment(payload: PaymentRequest) {
+    const makePayment = async (payload: PaymentRequest) => {
         setLoading(true);
-        const response = await initiatePayment(payload);
-        setData(response);
-        setLoading(false);
-    }
+        setError(null);
+        try {
+            const response = await initiatePayment(payload);
+            setData(response);
+        } catch (err: any) {
+            setError(err.message || "Payment failed");
+        } finally {
+            setLoading(false);
+        }
+    };
 
-    return { data, loading, makePayment };
-} 
+    return { data, loading, error, makePayment };
+}
+ 

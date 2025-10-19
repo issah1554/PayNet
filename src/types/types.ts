@@ -60,6 +60,6 @@ export interface Payment {
 
 export interface PaymentRequest {
     planId: Plan['id'];
-    paymentMethod: number; 
+    paymentMethod: string; 
     phoneNumber: number;
 }
