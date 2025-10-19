@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface LoaderProps {
-    type?: 'spin' | 'dots' | 'glow' | 'spin-dots' | 'spin-smooth' | 'spin-double'|'bars' | 'bars2' | 'dots-3';
+    type?: 'spin' | 'dots' | 'glow' | 'spin-dots' | 'spin-smooth' | 'spin-double' | 'bars' | 'bars2' | 'dots-3' | 'blob' | 'globe';
     size?: number;
     color?: string;
     text?: string;
@@ -225,6 +225,106 @@ const Loader: React.FC<LoaderProps> = ({
                         `}</style>
                         <div className="dots-3" style={style}></div>
                     </>
+                );
+            case 'blob':
+                return (
+                    <>
+                        <style>
+                            {`
+                            .blob {
+                            width: 70px;
+                            height: 70px;
+                            position: relative;
+                            background: var(--color-primary);
+                            border-radius: 50%;
+                            display: block;
+                            filter: blur(.5px);
+                            animation: rotate 12s linear infinite; /* slow rotation */
+                            }
+
+                            @keyframes rotate {
+                            0%   { transform: rotate(0deg); }
+                            100% { transform: rotate(360deg); }
+                            }
+
+                            .blob:before,
+                            .blob:after {
+                            content: "";
+                            position: absolute;
+                            top: 0; left: 0;
+                            width: 100%; height: 100%;
+                            background: var(--color-primary);
+                            border-radius: 50%;
+                            animation: morph 6s infinite ease-in-out;
+                            }
+
+                            .blob:after { animation-duration: 8.5s; animation-delay: -1.7s; }
+
+                            @keyframes morph {
+                            0%   { border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%; }
+                            10%  { border-radius: 65% 35% 55% 45% / 60% 40% 50% 50%; }
+                            22%  { border-radius: 55% 70% 40% 65% / 50% 65% 35% 60%; }
+                            35%  { border-radius: 70% 30% 60% 40% / 35% 70% 50% 60%; }
+                            48%  { border-radius: 45% 55% 75% 35% / 55% 60% 40% 50%; }
+                            60%  { border-radius: 60% 40% 50% 65% / 45% 55% 70% 30%; }
+                            73%  { border-radius: 55% 65% 45% 50% / 65% 35% 60% 40%; }
+                            85%  { border-radius: 50% 45% 65% 55% / 50% 70% 40% 60%; }
+                            100% { border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%; }
+                            }
+                        `}
+                        </style>
+                        <div className="blob" style={style}></div>
+                    </>
+                );
+
+            case 'globe':
+                return (
+                    <>
+                        <style>
+                            {`
+
+.container {
+	width: 45px;
+	height: 45px;
+	border-radius: 100%;
+	background: linear-gradient(165deg, rgba(255,255,255,1) 0%, rgb(220, 220, 220) 40%, rgb(170, 170, 170) 98%, rgb(10, 10, 10) 100%);
+	position: relative;
+}
+.globe {
+	
+}
+
+.globe:before {
+	position: absolute;
+	content: '';
+	width: 100%;
+	height: 100%;
+	border-radius: 100%;
+	border-bottom: 0 solid #ffffff05;
+	
+	box-shadow: 
+		0 -10px 20px 20px #ffffff40 inset,
+		0 -5px 15px 10px #ffffff50 inset,
+		0 -2px 5px #ffffff80 inset,
+		0 -3px 2px #ffffffBB inset,
+		0 2px 0px #ffffff,
+		0 2px 3px #ffffff,
+		0 5px 5px #ffffff90,
+		0 10px 15px #ffffff60,
+		0 10px 20px 20px #ffffff40;
+	filter: blur(3px);
+	animation: 2s rotate linear infinite;
+}
+
+@keyframes rotate {
+	100% {
+		transform: rotate(360deg)
+	}
+}                        `}
+                        </style>
+                        <div className="container" style={style}>
+                            <div className="globe" ></div>
+                        </div>                    </>
                 );
 
             default:

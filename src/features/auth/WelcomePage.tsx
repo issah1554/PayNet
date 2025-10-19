@@ -61,7 +61,7 @@ export default function WelcomePage() {
                 <h5 className="mb-3 fw-semibold text-primary">Choose Your Internet Package</h5>
                 <p className="text-muted small mb-4">Select your preferred internet plan. Prices are in TZS.</p>
                 {plansLoading ? (
-                  <Loader type="bars" />
+                  <Loader type="bars" size={100}/>
                 ) : (
                   <div className="row g-4 animation-zoom-in">
                     {plans.map((plan) => (
@@ -175,7 +175,7 @@ export default function WelcomePage() {
         onSubmit={handleSubmit}
       />
 
-      {paymentLoading && <Loader type="bars" />}
+      {paymentLoading && <Loader type="blob" text="Pending payment" size={120}/>}
       {paymentError && <p className="text-danger mt-3">{paymentError}</p>}
       {paymentData && <p className="text-success mt-3">Payment successful! ID: {paymentData.id}</p>}
     </AuthContainer>
