@@ -44,18 +44,25 @@ export interface Device {
 
 
 // Payment and PaymentMethod
-export interface PaymentMethod {
+export interface BasePaymentMethod {
     id: string;
     name: string;
     status: "enabled" | "disabled";
 }
+
+export interface ReactPaymentMethod extends BasePaymentMethod{
+    description: string;
+    imgurl: string;
+}
+
+
 
 export interface Payment {
     id: string;
     amount: number; // Based on choosen plan
     currency: string;
     status: "pending" | "completed" | "failed";
-    method: PaymentMethod;
+    method: BasePaymentMethod['id'];
     phoneNumber: number;
     plan: Plan;
     createdAt?: string;
