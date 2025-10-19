@@ -1,17 +1,21 @@
-// services/paymentService.ts
+import type { PaymentRequest } from "../types/types";
 export async function getPaymentMethods() {
     const res = await fetch("/api/payments/methods");
     return res.json();
 }
 
-// services/planService.ts
 export async function getPlans() {
     const res = await fetch("/api/plans");
     const data = await res.json();
-
-    // Simulate network delay
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-
     return data; // returns array of plans
 }
 
+
+export async function initiatePayment(data: PaymentRequest) {
+    const res = await fetch(`/api/payments/initiate`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+    });
+    return res.json();
+}

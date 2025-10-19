@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import MultiStepContainer from "../../components/ui/MultiStepContainer";
 import TextInput from "../../components/ui/TextInput";
 import AuthContainer from "./components/AuthContainer";
-import { usePlans } from "../../hooks/usePayments";
+import { usePlans, usePaymentRequest } from "../../hooks/usePayments";
 import Loader from "../../components/ui/Loaders";
 
 export default function WelcomePage() {

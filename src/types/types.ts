@@ -13,11 +13,10 @@ export interface Device {
     name: string; 
     macAddress: string;
     ipAddress?: string;
-    previousPlans?: Plan[];
-    currentPlan?: Plan;
-    status: "active" | "inactive" | "blocked"; // device state
+    status: "active" | "inactive" | "blocked";
     userId: string;         // owner
-    planId?: string;        // assigned plan (optional if device tracks plan individually)
+    plans?: DevicePlan[];       // Plans history
+    currentPlan?: DevicePlan['status'];
     createdAt?: string;
     updatedAt?: string;
 }
@@ -36,20 +35,31 @@ export interface Plan {
     users?: User[];
 }
 
+export interface DevicePlan{
+    id: string;
+    status: "active" | "expired" | "pending";
+}
+
 // Payment and PaymentMethod
 export interface PaymentMethod {
     id: string;
     name: string;
-    status: string; // e.g., "active", "inactive"
+    status: "enabled" | "disabled";
 }
 
 export interface Payment {
     id: string;
-    amount: number;
+    amount: number; // Based on choosen plan
     currency: string;
-    status: string; // e.g., "pending", "completed", "failed"
+    status: "pending" | "completed" | "failed";
     method: PaymentMethod;
-    user: User;
+    phoneNumber: number;
     plan: Plan;
     createdAt?: string;
+}
+
+export interface PaymentRequest {
+    planId: Plan['id'];
+    paymentMethod: number; 
+    phoneNumber: number;
 }
