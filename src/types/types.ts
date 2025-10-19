@@ -8,20 +8,6 @@ export interface User {
     updatedAt?: string;
 }
 
-export interface Device {
-    id: string;
-    name: string; 
-    macAddress: string;
-    ipAddress?: string;
-    status: "active" | "inactive" | "blocked";
-    userId: string;         // owner
-    plans?: DevicePlan[];       // Plans history
-    currentPlan?: DevicePlan['status'];
-    createdAt?: string;
-    updatedAt?: string;
-}
-
-
 // Existing Plan interface
 export interface Plan {
     id: string;
@@ -35,10 +21,27 @@ export interface Plan {
     users?: User[];
 }
 
-export interface DevicePlan{
+export interface DevicePlan {
     id: string;
     status: "active" | "expired" | "pending";
 }
+
+
+export interface Device {
+    id: string;
+    name: string;
+    macAddress: string;
+    ipAddress?: string;
+    status: "active" | "inactive" | "blocked";
+    userId: string;         // owner
+    plans?: DevicePlan[];       // Plans history
+    currentPlan?: DevicePlan['status'];
+    createdAt?: string;
+    updatedAt?: string;
+}
+
+
+
 
 // Payment and PaymentMethod
 export interface PaymentMethod {
@@ -60,6 +63,6 @@ export interface Payment {
 
 export interface PaymentRequest {
     planId: Plan['id'];
-    paymentMethod: string; 
+    paymentMethod: string;
     phoneNumber: number;
 }

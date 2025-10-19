@@ -7,7 +7,7 @@ export default function ForgotPasswordPage() {
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
 
-  const handleSubmitEmail = async (email: string) => {
+  const handleSubmitEmail = async () => {
     setLoading(true);
     setError("");
     setMessage("");

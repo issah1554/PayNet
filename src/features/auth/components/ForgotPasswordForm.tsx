@@ -17,7 +17,7 @@ export default function ForgotPasswordForm({
   message,
   error,
 }: ForgotPasswordFormProps) {
-  const [email, setEmail] = useState<string>("");
+  const [email] = useState<string>("");
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
