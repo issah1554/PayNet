@@ -1,5 +1,5 @@
 import * as msw from "msw";
-import type { Plan, PaymentMethod, PaymentRequest } from "../types/types";
+import type { Plan, BasePaymentMethod, PaymentRequest } from "../types/types";
 const { rest } = msw;
 
 // shared mock data
@@ -33,11 +33,11 @@ const mockPlans: Plan[] = [
   },
 ];
 
-const methods: PaymentMethod[] = [
+const methods: BasePaymentMethod[] = [
   { id: "mpesa", name: "M-Pesa", status: "enabled" },
   { id: "airtelmoney", name: "M-Pesa", status: "enabled" },
-  { id: "halopesa", name: "M-Pesa", status: "enabled" },
-  { id: "mixxbyyass", name: "Tigo Pesa", status: "enabled" },
+  { id: "halopesa", name: "M-Pesa", status: "disabled" },
+  { id: "mixxbyyass", name: "Mixx By Yas", status: "enabled" },
 ];
 
 export const handlers = [

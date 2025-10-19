@@ -19,3 +19,4 @@ export async function initiatePayment(data: PaymentRequest) {
     });
     return res.json();
 }
+

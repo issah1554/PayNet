@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import MultiStepContainer from "../../components/ui/MultiStepContainer";
 import TextInput from "../../components/ui/TextInput";
 import AuthContainer from "./components/AuthContainer";
-import { usePlans, usePaymentRequest } from "../../hooks/usePayments";
+import { usePlans, usePaymentRequest, usePaymentMethods } from "../../hooks/usePayments";
 import Loader from "../../components/ui/Loaders";
 import type { PaymentRequest } from "../../types/types";
 
@@ -14,13 +14,10 @@ export default function WelcomePage() {
   const [isMdUp, setIsMdUp] = useState(false);
 
   const { plans, loading: plansLoading } = usePlans();
+  const { methods: paymentMethods, loading: methodsLoading, error: methodsError } = usePaymentMethods();
   const { data: paymentData, loading: paymentLoading, error: paymentError, makePayment } = usePaymentRequest();
 
-  const paymentMethods = [
-    { id: "mpesa", name: "M-Pesa", img: "/mpesa-logo.png", desc: "Pay quickly via Safaricom M-Pesa." },
-    { id: "airtelmoney", name: "Airtel Money", img: "/airtelmoney-logo.png", desc: "Use Airtel Money for secure payments." },
-    { id: "halopesa", name: "HaloPesa", img: "/halopesa-logo.png", desc: "HaloPesa offers convenient mobile payment options." },
-  ];
+
 
   useEffect(() => {
     const handleResize = () => setIsMdUp(window.innerWidth >= 768);
@@ -34,7 +31,7 @@ export default function WelcomePage() {
 
     const payload: PaymentRequest = {
       planId: selectedPlan,
-      paymentMethod: selectedMethod, // string, must match type
+      paymentMethod: selectedMethod,
       phoneNumber: Number(phone),
     };
 
@@ -70,7 +67,9 @@ export default function WelcomePage() {
                     {plans.map((plan) => (
                       <div className="col-12 col-md-4" key={plan.id}>
                         <div
-                          className={`card shadow-sm border-2 text-center p-4 h-100 transition ${selectedPlan === plan.id ? "border-primary bg-primary-subtle" : "border-0 bg-white"
+                          className={`card shadow-sm border-2 text-center p-4 h-100 transition ${selectedPlan === plan.id
+                              ? "border-primary bg-primary-subtle"
+                              : "border-0 bg-white"
                             }`}
                           onClick={() => setSelectedPlan(plan.id)}
                           style={{ cursor: "pointer", minHeight: "220px" }}
@@ -98,27 +97,49 @@ export default function WelcomePage() {
                 <h5 className="mb-3 fw-semibold text-primary">Choose Your Payment Method</h5>
                 <p className="text-muted small mb-4">Select a payment option to complete your purchase.</p>
                 <div className="row g-4">
-                  {paymentMethods.map((method) => (
-                    <div className="col-12 col-md-4" key={method.id}>
-                      <div
-                        className={`card shadow-sm border-2 text-center p-4 h-100 transition ${selectedMethod === method.id ? "border-primary bg-primary-subtle" : "border-0 bg-white"
-                          }`}
-                        onClick={() => setSelectedMethod(method.id)}
-                        style={{ cursor: "pointer", minHeight: "220px" }}
-                      >
-                        <div className="d-flex justify-content-center align-items-center mb-3">
-                          <img
-                            src={method.img}
-                            alt={method.name}
-                            className="img-fluid"
-                            style={{ width: "100px", height: "60px", objectFit: "contain" }}
-                          />
-                        </div>
-                        <h6 className="fw-semibold mb-1">{method.name}</h6>
-                        <p className="text-muted small mb-0">{method.desc}</p>
-                      </div>
+                  {methodsLoading ? (
+                    <div className="col-12 d-flex justify-content-center">
+                      <Loader type="bars" />
                     </div>
-                  ))}
+                  ) : methodsError ? (
+                    <p className="text-danger">{methodsError}</p>
+                  ) : (
+                    paymentMethods.map((method) => {
+                      const isDisabled = method.status === "disabled";
+                      return (
+                        <div className="col-12 col-md-4" key={method.id}>
+                          <div
+                            className={`card shadow-sm border-2 text-center p-4 h-100 transition ${selectedMethod === method.id
+                                ? "border-primary bg-primary-subtle"
+                                : isDisabled
+                                  ? "border-0 bg-light text-muted"
+                                  : "border-0 bg-white"
+                              }`}
+                            onClick={() => !isDisabled && setSelectedMethod(method.id)}
+                            title={isDisabled ? "This payment method is currently unavailable" : undefined} // browser tooltip
+                            style={{
+                              cursor: isDisabled ? "not-allowed" : "pointer",
+                              minHeight: "220px",
+                              position: "relative",
+                              opacity: isDisabled ? 0.6 : 1,
+                            }}
+                          >
+                            <div className="d-flex justify-content-center align-items-center mb-3">
+                              <img
+                                src={method.imgurl}
+                                alt={method.name}
+                                className="img-fluid"
+                                style={{ width: "100px", height: "60px", objectFit: "contain" }}
+                              />
+                            </div>
+                            <h6 className="fw-semibold mb-1">{method.name}</h6>
+                            <p className="text-muted small mb-0">{method.description}</p>
+
+                          </div>
+                        </div>
+                      );
+                    })
+                  )}
                 </div>
               </div>
             ),
@@ -156,9 +177,7 @@ export default function WelcomePage() {
 
       {paymentLoading && <Loader type="bars" />}
       {paymentError && <p className="text-danger mt-3">{paymentError}</p>}
-      {paymentData && (
-        <p className="text-success mt-3">Payment successful! ID: {paymentData.id}</p>
-      )}
+      {paymentData && <p className="text-success mt-3">Payment successful! ID: {paymentData.id}</p>}
     </AuthContainer>
   );
 }
