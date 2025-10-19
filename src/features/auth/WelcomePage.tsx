@@ -54,7 +54,7 @@ export default function WelcomePage() {
                 {plansLoading ? (
                   <Loader type="bars"/>
                 ) : (
-                  <div className="row g-4">
+                  <div className="row g-4 animation-zoom-in">
                     {plans.map((plan) => (
                       <div className="col-12 col-md-4" key={plan.id}>
                         <div

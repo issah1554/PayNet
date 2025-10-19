@@ -86,7 +86,7 @@ export default function AuthContainer({
             paddingTop: "48px", // optional: leave space below navIcon
           }}
         >
-          <div className="w-100 p-4" style={{ maxWidth: "700px", margin: "0 auto" }}>
+          <div className="w-100 px-4" style={{ maxWidth: "700px", margin: "0 auto" }}>
             {children}
           </div>
         </ScrollbarWrapper>

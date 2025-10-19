@@ -20,9 +20,9 @@ export default function LoginForm({ onLogin, loading = false, error }: LoginForm
   };
 
   return (
-    <div className="card  animetion-zoom-in bg-transparent border-0  p-0 p-md-4">
+    <div className="card  animation-zoom-in bg-transparent border-0  p-0 p-md-4">
       <div className="card-body p-0">
-        
+
         <div className="mb-4">
           <h3 className="text-primary fw-semibold">
             Welcome Back

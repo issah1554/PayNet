@@ -68,7 +68,7 @@ export default function MultiStepContainer({ steps, onSubmit }: MultiStepContain
                 </div>
 
                 {/* Step Content with fade animation */}
-                <div className="card-body px-0 py-4 animetion-zoom-in" key={currentStep}>
+                <div className="card-body px-0 py-4 animation-zoom-in" key={currentStep}>
                     {steps[currentStep].content}
                 </div>
 
