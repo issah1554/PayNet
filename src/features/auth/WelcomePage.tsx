@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import MultiStepContainer from "../../components/ui/MultiStepContainer";
 import TextInput from "../../components/ui/TextInput";
 import AuthContainer from "./components/AuthContainer";
+import { usePlans } from "../../hooks/usePayments";
 
 export default function WelcomePage() {
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
@@ -9,6 +10,8 @@ export default function WelcomePage() {
   const [username, setUsername] = useState("");
   const [phone, setPhone] = useState("");
   const [isMdUp, setIsMdUp] = useState(false);
+
+  const { plans, loading: plansLoading } = usePlans(); // ✅ Use the hook
 
   useEffect(() => {
     const handleResize = () => setIsMdUp(window.innerWidth >= 768);
@@ -47,51 +50,35 @@ export default function WelcomePage() {
                   Shillings (TZS) and include data limits.
                 </p>
 
-                <div className="row g-4">
-                  {[
-                    {
-                      name: "Basic",
-                      price: "TZS 1,000",
-                      limit: "500 MB",
-                      duration: "per hour",
-                      desc: "Light browsing, email, and messaging",
-                    },
-                    {
-                      name: "Standard",
-                      price: "TZS 3,000",
-                      limit: "2 GB",
-                      duration: "per day",
-                      desc: "Streaming, social media, and regular work use",
-                    },
-                    {
-                      name: "Premium",
-                      price: "TZS 15,000",
-                      limit: "10 GB",
-                      duration: "per week",
-                      desc: "High-speed access with extended data limit",
-                    },
-                  ].map((plan) => (
-                    <div className="col-12 col-md-4" key={plan.name}>
-                      <div
-                        className={`card shadow-sm border-2 text-center p-4 h-100 transition ${selectedPlan === plan.name
-                            ? "border-primary bg-primary-subtle"
-                            : "border-0 bg-white"
-                          }`}
-                        onClick={() => setSelectedPlan(plan.name)}
-                        style={{ cursor: "pointer", minHeight: "220px" }}
-                      >
-                        <h6 className="fw-bold mb-2">{plan.name}</h6>
-                        <p className="text-muted small mb-1">{plan.desc}</p>
-                        <p className="fw-semibold text-primary mb-1">
-                          {plan.price} / {plan.duration}
-                        </p>
-                        <p className="text-secondary small mb-0">
-                          Data Limit: {plan.limit}
-                        </p>
+                {plansLoading ? (
+                  <p>Loading plans...</p>
+                ) : (
+                  <div className="row g-4">
+                    {plans.map((plan) => (
+                      <div className="col-12 col-md-4" key={plan.id}>
+                        <div
+                          className={`card shadow-sm border-2 text-center p-4 h-100 transition ${selectedPlan === plan.id
+                              ? "border-primary bg-primary-subtle"
+                              : "border-0 bg-white"
+                            }`}
+                          onClick={() => setSelectedPlan(plan.id)}
+                          style={{ cursor: "pointer", minHeight: "220px" }}
+                        >
+                          <h6 className="fw-bold mb-2">{plan.name}</h6>
+                          <p className="text-muted small mb-1">
+                            {plan.description}
+                          </p>
+                          <p className="fw-semibold text-primary mb-1">
+                            {plan.currency} {plan.price} / {plan.duration}
+                          </p>
+                          <p className="text-secondary small mb-0">
+                            Data Limit: {plan.dataLimit}
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                  ))}
-                </div>
+                    ))}
+                  </div>
+                )}
               </div>
             ),
           },
@@ -130,8 +117,8 @@ export default function WelcomePage() {
                     <div className="col-12 col-md-4" key={method.name}>
                       <div
                         className={`card shadow-sm border-2 text-center p-4 h-100 transition ${selectedMethod === method.name
-                            ? "border-primary bg-primary-subtle"
-                            : "border-0 bg-white"
+                          ? "border-primary bg-primary-subtle"
+                          : "border-0 bg-white"
                           }`}
                         onClick={() => setSelectedMethod(method.name)}
                         style={{ cursor: "pointer", minHeight: "220px" }}
@@ -191,8 +178,8 @@ export default function WelcomePage() {
         ]}
         onSubmit={() =>
           alert(
-            `Selected Plan: ${selectedPlan || "None"}\nPayment Method: ${selectedMethod || "None"
-            }\nUsername: ${username || "N/A"}\nPhone: ${phone || "N/A"}`
+            `Selected Plan: ${selectedPlan || "None"}\nPayment Method: ${selectedMethod || "None"}\nUsername: ${username || "N/A"
+            }\nPhone: ${phone || "N/A"}`
           )
         }
       />

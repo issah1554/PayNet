@@ -22,5 +22,11 @@ export async function getTransactionHistory(userId: string) {
 // services/planService.ts
 export async function getPlans() {
     const res = await fetch("/api/plans");
-    return res.json(); // returns array of plans
+    const data = await res.json();
+
+    // Simulate network delay
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+
+    return data; // returns array of plans
 }
+

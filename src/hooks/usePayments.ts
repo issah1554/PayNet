@@ -1,12 +1,7 @@
 // hooks/usePayments.ts
 import { useState, useEffect } from "react";
 import { getPaymentMethods, createTransaction, getTransactionHistory, getPlans } from "../services/paymentService";
-
-interface PaymentMethod {
-    id: string;
-    // add other fields as needed
-    [key: string]: any;
-}
+import type { Plan, PaymentMethod, } from "../types/types"
 
 interface Transaction {
     id: string;
@@ -19,12 +14,6 @@ interface Transaction {
     [key: string]: any;
 }
 
-interface Plan {
-    id: string;
-    name: string;
-    price: number;
-    [key: string]: any;
-}
 
 export function usePayments(userId: string) {
     const [methods, setMethods] = useState<PaymentMethod[]>([]);
@@ -60,4 +49,4 @@ export function usePlans() {
     }, []);
 
     return { plans, loading };
-}
+}   
