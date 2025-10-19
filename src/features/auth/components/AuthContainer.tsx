@@ -1,17 +1,18 @@
 import React, { type CSSProperties } from "react";
 import { Link } from "react-router-dom";
+import ScrollbarWrapper from "../../../components/ui/ScrollbarWrapper";
 
 interface AuthContainerProps {
   children: React.ReactNode;
-  leftCol?: string;   // e.g. "col-md-6"
-  rightCol?: string;  // e.g. "col-md-6"
-  rightClassName?: string; // additional class for right column
-  rightStyle?: CSSProperties; // additional style for right column
+  leftCol?: string;
+  rightCol?: string;
+  rightClassName?: string;
+  rightStyle?: CSSProperties;
   imageSrc?: string;
   logoSrc?: string;
   appName?: string;
-  navIcon?: React.ReactNode;  // Right column top icon
-  navLink?: string;           // Right column link
+  navIcon?: React.ReactNode;
+  navLink?: string;
 }
 
 export default function AuthContainer({
@@ -29,10 +30,21 @@ export default function AuthContainer({
   return (
     <div className="d-flex vh-100 bg-light">
       {/* Left Column — Image Section */}
-      <div className={`d-none d-md-flex ${leftCol} bg-body-secondary position-relative justify-content-center align-items-center overflow-hidden`}>
-        <Link to={"/"} className="position-absolute top-0 start-0 m-4 fw-bold text-primary fs-4">
+      <div
+        className={`d-none d-md-flex ${leftCol} bg-body-secondary position-relative justify-content-center align-items-center overflow-hidden`}
+      >
+        <Link
+          to="/"
+          className="position-absolute top-0 start-0 m-4 fw-bold text-primary fs-4"
+        >
           <div className="d-flex align-items-center gap-2 mt-2">
-            {logoSrc && <img src={logoSrc} alt={`${appName} Logo`} style={{ width: "45px", height: "45px", objectFit: "contain" }} />}
+            {logoSrc && (
+              <img
+                src={logoSrc}
+                alt={`${appName} Logo`}
+                style={{ width: "45px", height: "45px", objectFit: "contain" }}
+              />
+            )}
             {appName}
           </div>
         </Link>
@@ -47,24 +59,38 @@ export default function AuthContainer({
 
       {/* Right Column — Form Section */}
       <div
-        className={`${rightCol} d-flex flex-column p-4 position-relative col-12 ${rightClassName}`}
+        className={`${rightCol} d-flex flex-column position-relative col-12 ${rightClassName}`}
         style={{
-          overflowY: "auto",
-          maxHeight: "100vh",
-          paddingTop: "80px",
-          ...rightStyle, // merge custom styles
+          ...rightStyle,
         }}
       >
-        <div className="w-100" style={{ maxWidth: "700px", margin: "0 auto" }}>
-          {navIcon && navLink && (
-            <div className="position-absolute top-0 end-0 m-4">
-              <Link to={navLink}>{navIcon}</Link>
-            </div>
-          )}
-          {children}
-        </div>
-      </div>
+        {/* Sticky navIcon */}
+        {navIcon && navLink && (
+          <div
+            style={{
+              position: "absolute",
+              top: "16px",
+              right: "16px",
+              zIndex: 10,
+            }}
+          >
+            <Link to={navLink}>{navIcon}</Link>
+          </div>
+        )}
 
+        {/* Scrollable area */}
+        <ScrollbarWrapper
+          style={{
+            overflowY: "auto",
+            maxHeight: "100vh",
+            paddingTop: "48px", // optional: leave space below navIcon
+          }}
+        >
+          <div className="w-100 p-4" style={{ maxWidth: "700px", margin: "0 auto" }}>
+            {children}
+          </div>
+        </ScrollbarWrapper>
+      </div>
     </div>
   );
 }

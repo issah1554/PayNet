@@ -3,6 +3,7 @@ import MultiStepContainer from "../../components/ui/MultiStepContainer";
 import TextInput from "../../components/ui/TextInput";
 import AuthContainer from "./components/AuthContainer";
 import { usePlans } from "../../hooks/usePayments";
+import Loader from "../../components/ui/Loaders";
 
 export default function WelcomePage() {
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
@@ -11,7 +12,7 @@ export default function WelcomePage() {
   const [phone, setPhone] = useState("");
   const [isMdUp, setIsMdUp] = useState(false);
 
-  const { plans, loading: plansLoading } = usePlans(); // ✅ Use the hook
+  const { plans, loading: plansLoading } = usePlans();
 
   useEffect(() => {
     const handleResize = () => setIsMdUp(window.innerWidth >= 768);
@@ -51,7 +52,7 @@ export default function WelcomePage() {
                 </p>
 
                 {plansLoading ? (
-                  <p>Loading plans...</p>
+                  <Loader type="bars"/>
                 ) : (
                   <div className="row g-4">
                     {plans.map((plan) => (
@@ -98,6 +99,7 @@ export default function WelcomePage() {
 
                 <div className="row g-4">
                   {[
+
                     {
                       name: "M-Pesa",
                       img: "/mpesa-logo.png",
@@ -149,11 +151,11 @@ export default function WelcomePage() {
             icon: <i className="bi bi-telephone fs-4"></i>,
             canProceed: username.trim() !== "" && phone.trim() !== "",
             content: (
-              <div>
+              <div className="row">
                 <h5 className="mb-3 fw-semibold text-primary">
                   Account Information
                 </h5>
-                <div className="my-4">
+                <div className="">
                   <TextInput
                     label="Username"
                     labelBgColor="var(--bs-light)"
@@ -162,7 +164,7 @@ export default function WelcomePage() {
                     onChange={(e) => setUsername(e.target.value)}
                   />
                 </div>
-                <div className="my-4">
+                <div className="my-2">
                   <TextInput
                     label="Phone number"
                     labelBgColor="var(--bs-light)"

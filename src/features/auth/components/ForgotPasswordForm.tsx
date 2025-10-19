@@ -25,10 +25,8 @@ export default function ForgotPasswordForm({
   };
 
   return (
-    <div
-      className="card  bg-transparent border-0  p-0 p-md-4 animetion-zoom-in"
-      style={{ width: "100%" }}
-    >
+    <div className="card  animetion-zoom-in w-100 bg-transparent border-0  p-0 p-md-4">
+      <div className="card-body p-0">
       <h3 className="text-primary mb-4">
         <i className="bi bi-key"></i> Forgot Password
       </h3>
@@ -67,6 +65,7 @@ export default function ForgotPasswordForm({
 
       {message && <div className="alert alert-success mt-3">{message}</div>}
       {error && <div className="alert alert-danger mt-3">{error}</div>}
+      </div>
     </div>
   );
 }
