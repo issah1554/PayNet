@@ -5,6 +5,7 @@ import AuthContainer from "./components/AuthContainer";
 import { usePlans, usePaymentRequest, usePaymentMethods } from "../../hooks/usePayments";
 import Loader from "../../components/ui/Loaders";
 import type { PaymentRequest } from "../../types/types";
+import Swal from "sweetalert2";
 
 export default function WelcomePage() {
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
@@ -16,8 +17,6 @@ export default function WelcomePage() {
   const { plans, loading: plansLoading } = usePlans();
   const { methods: paymentMethods, loading: methodsLoading, error: methodsError } = usePaymentMethods();
   const { data: paymentData, loading: paymentLoading, error: paymentError, makePayment } = usePaymentRequest();
-
-
 
   useEffect(() => {
     const handleResize = () => setIsMdUp(window.innerWidth >= 768);
@@ -35,7 +34,28 @@ export default function WelcomePage() {
       phoneNumber: Number(phone),
     };
 
-    makePayment(payload);
+    // create a toast mixin
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 5000,
+      timerProgressBar: true,
+    });
+
+    makePayment(payload)
+      .then((res) => {
+        Toast.fire({
+          icon: "success",
+          title: `Payment successful! ID: ${res}`,
+        });
+      })
+      .catch((err: any) => {
+        Toast.fire({
+          icon: "error",
+          title: `Payment failed: ${err.message || "Unknown error"}`,
+        });
+      });
   };
 
   return (
@@ -61,15 +81,15 @@ export default function WelcomePage() {
                 <h5 className="mb-3 fw-semibold text-primary">Choose Your Internet Package</h5>
                 <p className="text-muted small mb-4">Select your preferred internet plan. Prices are in TZS.</p>
                 {plansLoading ? (
-                  <Loader type="bars" size={100}/>
+                  <Loader type="bars" size={100} />
                 ) : (
                   <div className="row g-4 animation-zoom-in">
                     {plans.map((plan) => (
                       <div className="col-12 col-md-4" key={plan.id}>
                         <div
                           className={`card shadow-sm border-2 text-center p-4 h-100 transition ${selectedPlan === plan.id
-                              ? "border-primary bg-primary-subtle"
-                              : "border-0 bg-white"
+                            ? "border-primary bg-primary-subtle"
+                            : "border-0 bg-white"
                             }`}
                           onClick={() => setSelectedPlan(plan.id)}
                           style={{ cursor: "pointer", minHeight: "220px" }}
@@ -110,10 +130,10 @@ export default function WelcomePage() {
                         <div className="col-12 col-md-4" key={method.id}>
                           <div
                             className={`card shadow-sm border-2 text-center p-4 h-100 transition ${selectedMethod === method.id
-                                ? "border-primary bg-primary-subtle"
-                                : isDisabled
-                                  ? "border-0 bg-light text-muted"
-                                  : "border-0 bg-white"
+                              ? "border-primary bg-primary-subtle"
+                              : isDisabled
+                                ? "border-0 bg-light text-muted"
+                                : "border-0 bg-white"
                               }`}
                             onClick={() => !isDisabled && setSelectedMethod(method.id)}
                             title={isDisabled ? "This payment method is currently unavailable" : undefined} // browser tooltip
@@ -175,9 +195,7 @@ export default function WelcomePage() {
         onSubmit={handleSubmit}
       />
 
-      {paymentLoading && <Loader type="blob" text="Pending payment" size={120}/>}
-      {paymentError && <p className="text-danger mt-3">{paymentError}</p>}
-      {paymentData && <p className="text-success mt-3">Payment successful! ID: {paymentData.id}</p>}
+      {paymentLoading && <Loader type="blob" text="Pending payment" size={120} />}
     </AuthContainer>
   );
 }

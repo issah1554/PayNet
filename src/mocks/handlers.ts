@@ -67,7 +67,7 @@ export const handlers = [
 
     // success
     return res(
-      ctx.delay(8000),
+      ctx.delay(3000),
       ctx.status(200),
       ctx.json({
         id: "pay_" + Date.now(),
