@@ -1,4 +1,6 @@
 import type { PaymentRequest } from "../types/types";
+
+
 export async function getPaymentMethods() {
     const res = await fetch("/api/payments/methods");
     return res.json();
