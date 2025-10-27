@@ -7,11 +7,11 @@ import "./assets/css/animations.css";
 import "./index.css";
 
 // ✅ Start the mock worker only in development
-import { worker } from "./mocks/browser";
+// import { worker } from "./mocks/browser";
 
-if (import.meta.env.DEV) {
-  worker.start();
-}
+// if (import.meta.env.DEV) {
+//   worker.start();
+// }
 
 
 import App from "./App.tsx";

@@ -2,12 +2,12 @@ import type { PaymentRequest } from "../types/types";
 
 
 export async function getPaymentMethods() {
-    const res = await fetch("/api/payments/methods");
+    const res = await fetch("http://localhost:8080/api/payments/methods");
     return res.json();
 }
 
 export async function getPlans() {
-    const res = await fetch("/api/plans");
+    const res = await fetch("http://localhost:8080/api/plans");
     const data = await res.json();
     return data; // returns array of plans
 }
