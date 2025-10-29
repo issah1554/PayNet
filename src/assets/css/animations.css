@@ -1,6 +1,5 @@
-
 /* 1. Fade-in */
-.animetion-fade-in {
+.animation-fade-in {
     animation: fadeIn 0.4s ease forwards;
 }
 
@@ -15,7 +14,7 @@
 }
 
 /* 2. Fade + slide up */
-.animetion-fade-slide-up {
+.animation-fade-slide-up {
     animation: fadeSlideUp 0.4s ease forwards;
 }
 
@@ -32,7 +31,7 @@
 }
 
 /* 3. Slide from left */
-.animetion-slide-left {
+.animation-slide-left {
     animation: slideLeft 0.4s ease forwards;
 }
 
@@ -49,7 +48,7 @@
 }
 
 /* 4. Slide from right */
-.animetion-slide-right {
+.animation-slide-right {
     animation: slideRight 0.4s ease forwards;
 }
 
@@ -66,7 +65,7 @@
 }
 
 /* 5. Scale-in (zoom) */
-.animetion-scale-in {
+.animation-scale-in {
     animation: scaleIn 0.4s ease forwards;
 }
 
@@ -83,7 +82,7 @@
 }
 
 /* 6. Flip-in (X-axis) */
-.animetion-flip-in {
+.animation-flip-in {
     animation: flipIn 0.5s ease forwards;
     transform-origin: top;
 }
@@ -101,7 +100,7 @@
 }
 
 /* 7. Bounce-in */
-.animetion-bounce-in {
+.animation-bounce-in {
     animation: bounceIn 0.5s ease forwards;
 }
 

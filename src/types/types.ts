@@ -20,6 +20,13 @@ export interface Plan {
     // Optional: which users have this plan
     users?: User[];
 }
+export interface Plan2 {
+    id: string;
+    name: string;
+    price: number;
+    currency: string;
+    features: ['Messaging', 'Team meetings', '5 TB storage'],
+}
 
 export interface DevicePlan {
     id: string;

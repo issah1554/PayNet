@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import MultiStepContainer from "../../components/ui/MultiStepContainer";
+import MultiStepContainer from "../../components/layout/MultiStepContainer";
 import TextInput from "../../components/ui/TextInput";
 import AuthContainer from "./components/AuthContainer";
 import { usePlans, usePaymentRequest, usePaymentMethods } from "../../hooks/usePayments";

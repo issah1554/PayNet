@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-import type { InputHTMLAttributes, ReactNode, CSSProperties } from "react";
-import styles from "./styles/TextInput.module.css";
+import React, { useState, type CSSProperties } from "react";
+import type { InputHTMLAttributes, ReactNode } from "react";
 
 type ColorVariant =
     | "primary"
@@ -14,21 +13,46 @@ type ColorVariant =
 
 type SizeVariant = "xs" | "sm" | "md" | "lg" | "xl";
 
-interface OutlinedTextFieldProps
-    extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
+interface TextInputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
     label: string;
     helperText?: string;
     variant?: ColorVariant;
     icon?: ReactNode;
     inputSize?: SizeVariant;
     type?: "text" | "password" | "phone" | "email";
-    labelBgColor?: string; // new prop for label background color
+    labelBgColor?: string;
 }
 
-const TextInput: React.FC<OutlinedTextFieldProps> = ({
+const sizePadding: Record<SizeVariant, string> = {
+    xs: "px-2 py-1 text-xs",
+    sm: "px-2.5 py-1.5 text-sm",
+    md: "px-3 py-3 text-base",
+    lg: "px-4 py-3 text-lg",
+    xl: "px-5 py-4 text-xl",
+};
+
+const labelTranslateY: Record<SizeVariant, string> = {
+    xs: "translate-y-2",
+    sm: "translate-y-3",
+    md: "translate-y-4",
+    lg: "translate-y-4.5",
+    xl: "translate-y-6",
+};
+
+const variantColors: Record<ColorVariant, string> = {
+    primary: "border-blue-500 focus:border-blue-600 focus:ring-blue-500",
+    primaryLight: "border-blue-200 focus:border-blue-300 focus:ring-blue-300",
+    light: "border-gray-300 focus:border-gray-400 focus:ring-gray-400",
+    light2: "border-gray-200 focus:border-gray-300 focus:ring-gray-300",
+    secondary: "border-purple-500 focus:border-purple-600 focus:ring-purple-500",
+    success: "border-green-500 focus:border-green-600 focus:ring-green-500",
+    info: "border-teal-500 focus:border-teal-600 focus:ring-teal-500",
+    warning: "border-yellow-400 focus:border-yellow-500 focus:ring-yellow-500",
+};
+
+const TextInput: React.FC<TextInputProps> = ({
     label,
     helperText,
-    id,
     type = "text",
     variant = "primary",
     icon,
@@ -36,20 +60,17 @@ const TextInput: React.FC<OutlinedTextFieldProps> = ({
     labelBgColor,
     ...props
 }) => {
-    const inputId =
-        id || `outlined-input-${Math.random().toString(36).substr(2, 9)}`;
-
     const [showPassword, setShowPassword] = useState(false);
     const [phoneValue, setPhoneValue] = useState("");
-    const [emailError, setEmailError] = useState<string | null>(null);
     const [emailValue, setEmailValue] = useState("");
+    const [emailError, setEmailError] = useState<string | null>(null);
 
+    const inputId = props.id || `input-${Math.random().toString(36).slice(2, 9)}`;
     const isPassword = type === "password";
     const isPhone = type === "phone";
     const isEmail = type === "email";
 
-    const effectiveType =
-        isPassword && showPassword ? "text" : isPhone ? "text" : type;
+    const effectiveType = isPassword && showPassword ? "text" : type === "phone" ? "text" : type;
 
     const togglePassword = () => setShowPassword((prev) => !prev);
 
@@ -76,50 +97,66 @@ const TextInput: React.FC<OutlinedTextFieldProps> = ({
     };
 
     const labelStyle: CSSProperties = labelBgColor
-        ? { backgroundColor: labelBgColor, padding: "0 0.3rem" }
+        ? { backgroundColor: labelBgColor, padding: "0 0.25rem" }
         : {};
 
     return (
-        <div
-            className={`${styles.field} ${styles[variant]} ${styles.iconRight} ${styles[inputSize]}`}
-        >
-            <div className={styles.inputWrapper}>
-                <input
-                    id={inputId}
-                    placeholder=" "
-                    type={effectiveType}
-                    className={`${styles.input} ${emailError ? styles.error : ""}`}
-                    value={isPhone ? phoneValue : isEmail ? emailValue : props.value}
-                    onChange={
-                        isPhone ? handlePhoneChange : isEmail ? handleEmailChange : props.onChange
-                    }
-                    onBlur={isEmail ? handleEmailBlur : props.onBlur}
-                    {...props}
-                />
+        <div className={`relative my-1`}>
+            <input
+                id={inputId}
+                placeholder=" "
+                type={effectiveType}
+                        className={`
+                peer w-full rounded-md border bg-white text-gray-900 outline-none
+                ${sizePadding[inputSize]} ${variantColors[variant]}
+                ${icon ? "pr-9" : ""}
+                ${emailError ? "border-red-500 focus:border-red-600 focus:ring-red-500" : ""}
+                transition-all duration-200
+                `}
+                value={isPhone ? phoneValue : isEmail ? emailValue : props.value}
+                onChange={isPhone ? handlePhoneChange : isEmail ? handleEmailChange : props.onChange}
+                onBlur={isEmail ? handleEmailBlur : props.onBlur}
+                {...props}
+            />
 
-                <label htmlFor={inputId} className={styles.label} style={labelStyle}>
-                    {label}
-                </label>
+            <label
+                htmlFor={inputId}
+                className={`
+                    bg-accent
+          absolute left-3 text-gray-400 text-sm 
+          transform origin-left
+          transition-all duration-150
+          peer-placeholder-shown:${labelTranslateY[inputSize]} 
+          peer-placeholder-shown:text-base
+          peer-focus:-translate-y-1/2 peer-focus:scale-85 peer-focus:text-blue-500
+        `}
+                style={labelStyle}
+            >
+                {label}
+            </label>
 
-                {isPassword ? (
-                    <span
-                        className={`${styles.icon} ${styles.toggle}`}
-                        role="button"
-                        tabIndex={0}
-                        aria-label={showPassword ? "Hide password" : "Show password"}
-                        onClick={togglePassword}
-                        onKeyDown={(e) => e.key === "Enter" && togglePassword()}
-                    >
-                        <i className={`bi ${showPassword ? "bi-eye-slash" : "bi-eye"}`}></i>
-                    </span>
-                ) : (
-                    icon && <span className={styles.icon}>{icon}</span>
-                )}
-            </div>
+            {isPassword && (
+                <span
+                    role="button"
+                    tabIndex={0}
+                    aria-label={showPassword ? "Hide password" : "Show password"}
+                    onClick={togglePassword}
+                    onKeyDown={(e) => e.key === "Enter" && togglePassword()}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 cursor-pointer hover:text-gray-600"
+                >
+                    <i className={`bi ${showPassword ? "bi-eye-slash" : "bi-eye"}`}></i>
+                </span>
+            )}
 
-            <div className={styles.help}>
-                {emailError ? emailError : helperText}
-            </div>
+            {icon && !isPassword && (
+                <div className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">{icon}</div>
+            )}
+
+            {helperText || emailError ? (
+                <p className={`mt-1 text-sm ${emailError ? "text-red-500" : "text-gray-400"}`}>
+                    {emailError || helperText}
+                </p>
+            ) : null}
         </div>
     );
 };
